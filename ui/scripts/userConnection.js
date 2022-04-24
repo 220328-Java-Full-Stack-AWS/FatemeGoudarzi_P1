@@ -25,7 +25,7 @@ let newUser = {
 
 */
 async function registerRequest(newUser) {
-    let userResourceURL = "http://localhost:8080/P1-Spec/register";
+    let userResourceURL = "http://localhost:8080/P1/register";
     let response = await fetch(
         userResourceURL,
         {
@@ -49,7 +49,7 @@ let authDto = {
 }
 */
 async function loginRequest(authDto) {
-  let userResourceURL = "http://localhost:8080/P1-Spec/login";
+  let userResourceURL = "http://localhost:8080/P1/login";
     let response = await fetch(
         userResourceURL,
         {
