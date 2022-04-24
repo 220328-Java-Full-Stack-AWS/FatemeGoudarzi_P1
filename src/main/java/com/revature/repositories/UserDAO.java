@@ -1,0 +1,117 @@
+package com.revature.repositories;
+
+import com.revature.models.UserModel;
+import com.revature.util.ConnectionManager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
+import com.revature.util.ConnectionManager;
+
+public class UserDAO implements CRUDInterface<UserModel>{
+
+
+    @Override
+    public UserModel create(UserModel model) {
+
+        String SQL = " INSERT INTO public.users ( first_name, last_name, user_name, pass_word,email) VALUES(?, ?, ?, ?, ?);";
+        try {
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+            pstmt.setString(1,model.getFirstName());
+            pstmt.setString(2,model.getLastName());
+            pstmt.setString(3,model.getUserName());
+            pstmt.setString(4,model.getPassWord());
+            pstmt.setString(5,model.getEmail());
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return model;
+    }
+
+    @Override
+    public UserModel update(UserModel model) {
+        return model;
+    }
+
+    @Override
+    public UserModel delete(UserModel Model) {
+        return null;
+    }
+
+    @Override
+    public UserModel read(UserModel model) {
+        UserModel outModel = new UserModel();
+        String SQL_1 = "SELECT * from public.users WHERE user_name = ? AND pass_word=?";
+
+        try {
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL_1);
+            pstmt.setString(1,model.getUserName());
+            pstmt.setString(2,model.getPassWord());
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()){
+                outModel.setFirstName(rs.getString("first_name"));
+                outModel.setLastName(rs.getString("last_name"));
+                outModel.setUserName(rs.getString("user_name"));
+                outModel.setEmail(rs.getString("email"));
+                outModel.setRole(rs.getInt("role_id"));
+                outModel.setPassWord(rs.getString("pass_word"));
+            }
+            System.out.println(model);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return outModel;
+    }
+
+//    @Override
+//    public UserModel read(String userName, String passWord) {
+//        UserModel model = new UserModel();
+//        String SQL_1 = "SELECT * from public.users WHERE user_name = ? AND pass_word=?";
+//
+//        try {
+//            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL_1);
+//            pstmt.setString(1,userName);
+//            pstmt.setString(2,passWord);
+//            ResultSet rs = pstmt.executeQuery();
+//            while (rs.next()){
+//                model.setFirstName(rs.getString("first_name"));
+//                model.setLastName(rs.getString("last_name"));
+//                model.setUserName(rs.getString("user_name"));
+//                model.setEmail(rs.getString("email"));
+//                model.setRole(rs.getInt("role_id"));
+//                model.setPassWord("*****");
+//            }
+//            System.out.println(model);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return model;
+//    }
+
+    @Override
+    public List<UserModel> getAll() {
+        List<UserModel> list = new LinkedList<>();
+        try {
+            String SQL = "SELECT * FROM public.users";
+            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                UserModel model = new UserModel();
+                model.setUserName(rs.getString("user_name"));
+                list.add(model);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+}
+
