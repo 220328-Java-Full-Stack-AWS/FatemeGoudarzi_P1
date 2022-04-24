@@ -79,6 +79,7 @@ let user = {
 }
 */
 async function updateUserRequest(user) {
+    
     let response = await fetch(
         userResourceURL,
         {
@@ -94,12 +95,14 @@ async function updateUserRequest(user) {
 }
 
 async function getUser(un) {
+    let userResourceURL = `http://localhost:8080/P1/users`;
+
     let response = await fetch(
         userResourceURL,
         {
             method: "GET",
             headers: {
-                username: un
+                userName: un
             }
         }
     );

@@ -18,7 +18,7 @@
             </div>
             <div class="flexRow">
                 <label>Password: </label>
-                <input type="password" id="password" placeholder="password" name="password">
+                <input type="" id="password" placeholder="password" name="password">
             </div>
         </div>
 
@@ -38,7 +38,7 @@
             let response = await loginRequest(authDto);
 
             console.log("Response: ", response);
-            console.log("Response JSON: ", response.json());
+            console.log("Response JSON: ", await response.json());
 
             if (response.status == 200) {
                 /*

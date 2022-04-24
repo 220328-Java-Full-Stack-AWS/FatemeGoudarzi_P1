@@ -33,66 +33,51 @@ public class UserDAO implements CRUDInterface<UserModel>{
     }
 
     @Override
-    public UserModel update(UserModel model) {
-        return model;
-    }
-
-    @Override
-    public UserModel delete(UserModel Model) {
-        return null;
-    }
-
-    @Override
     public UserModel read(UserModel model) {
         UserModel outModel = new UserModel();
-        String SQL_1 = "SELECT * from public.users WHERE user_name = ? AND pass_word=?";
+        if (model.getPassWord() != null && model.getUserName() != null) {
+            String SQL = "SELECT * from public.users WHERE user_name = ? AND pass_word=?";
+            try {
+                PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+                pstmt.setString(1, model.getUserName());
+                pstmt.setString(2, model.getPassWord());
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    outModel.setFirstName(rs.getString("first_name"));
+                    outModel.setLastName(rs.getString("last_name"));
+                    outModel.setUserName(rs.getString("user_name"));
+                    outModel.setEmail(rs.getString("email"));
+                    outModel.setRoleId(rs.getInt("role_id"));
+                    outModel.setPassWord(rs.getString("pass_word"));
+                }
 
-        try {
-            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL_1);
-            pstmt.setString(1,model.getUserName());
-            pstmt.setString(2,model.getPassWord());
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()){
-                outModel.setFirstName(rs.getString("first_name"));
-                outModel.setLastName(rs.getString("last_name"));
-                outModel.setUserName(rs.getString("user_name"));
-                outModel.setEmail(rs.getString("email"));
-                outModel.setRole(rs.getInt("role_id"));
-                outModel.setPassWord(rs.getString("pass_word"));
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            System.out.println(model);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
 
+        }else if(model.getPassWord() == null && model.getUserName() != null){
+
+            String SQL = "SELECT * from public.users WHERE user_name = ? ";
+            try {
+                PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+                pstmt.setString(1, model.getUserName());
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    outModel.setFirstName(rs.getString("first_name"));
+                    outModel.setLastName(rs.getString("last_name"));
+                    outModel.setUserName(rs.getString("user_name"));
+                    outModel.setEmail(rs.getString("email"));
+                    outModel.setRoleId(rs.getInt("role_id"));
+                    outModel.setPassWord(rs.getString("pass_word"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return outModel;
     }
 
-//    @Override
-//    public UserModel read(String userName, String passWord) {
-//        UserModel model = new UserModel();
-//        String SQL_1 = "SELECT * from public.users WHERE user_name = ? AND pass_word=?";
-//
-//        try {
-//            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL_1);
-//            pstmt.setString(1,userName);
-//            pstmt.setString(2,passWord);
-//            ResultSet rs = pstmt.executeQuery();
-//            while (rs.next()){
-//                model.setFirstName(rs.getString("first_name"));
-//                model.setLastName(rs.getString("last_name"));
-//                model.setUserName(rs.getString("user_name"));
-//                model.setEmail(rs.getString("email"));
-//                model.setRole(rs.getInt("role_id"));
-//                model.setPassWord("*****");
-//            }
-//            System.out.println(model);
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return model;
-//    }
+
 
     @Override
     public List<UserModel> getAll() {
@@ -112,6 +97,15 @@ public class UserDAO implements CRUDInterface<UserModel>{
         return list;
     }
 
+    @Override
+    public UserModel update(UserModel model) {
+        return model;
+    }
+
+    @Override
+    public UserModel delete(UserModel Model) {
+        return null;
+    }
 
 }
 

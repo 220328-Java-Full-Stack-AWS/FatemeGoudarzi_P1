@@ -39,14 +39,14 @@ public class AuthorizationServlet extends HttpServlet {
 
                 case "login":
                     outputModel = authService.login(model);
-                    String out = outputModel.getPassWord();
-                    String in = model.getPassWord();
-                    if(model.getUserName() != null & out.equals(in)) {
-                        System.out.println("inside if");
+                    String outPassWord = outputModel.getPassWord();
+                    String inPassWord = model.getPassWord();
+                    if(model.getUserName() != null & outPassWord.equals(inPassWord)) {
+                        json = mapper.writeValueAsString(outputModel);
                         resp.setStatus(200);
-                        resp.getWriter().print(new ObjectMapper().writeValueAsString(outputModel.getUserName()));
+                        resp.getWriter().print(json);
                         resp.setHeader("access-control-expose-headers", "authToken");
-                        resp.setHeader("authToken",out);
+                        resp.setHeader("authToken",model.getUserName() );
                     } else {
                         resp.setStatus(401);
                     }

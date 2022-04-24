@@ -46,15 +46,15 @@
     </servlet-mapping>
 
 
-<!--    <servlet>-->
-<!--        <servlet-name>getAllUsers</servlet-name>-->
-<!--        <servlet-class>com.revature.servlets.UserServiceServlet</servlet-class>-->
-<!--    </servlet>-->
+    <servlet>
+        <servlet-name>getUser</servlet-name>
+        <servlet-class>com.revature.servlets.UserServiceServlet</servlet-class>
+    </servlet>
 
-<!--    <servlet-mapping>-->
-<!--        <servlet-name>getAllUsers</servlet-name>-->
-<!--        <url-pattern>/users</url-pattern>-->
-<!--    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>getUser</servlet-name>
+        <url-pattern>/users</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>getReimbursement</servlet-name>

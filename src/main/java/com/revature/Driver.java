@@ -3,6 +3,7 @@ package com.revature;
 
 import com.revature.models.UserModel;
 import com.revature.services.AuthService;
+import com.revature.services.UserService;
 
 public class Driver {
 
@@ -25,11 +26,11 @@ public class Driver {
 
 //
 //        //Login
-//        UserService us3 = new UserService();
+        UserService us3 = new UserService();
         AuthService authService  = new AuthService();
         UserModel outputModel  = new UserModel();
         UserModel model  = new UserModel("SaraSmith","superStrong");
-        outputModel = authService.login(model);
+        outputModel = us3.read(model);
         System.out.println(outputModel);
 
 

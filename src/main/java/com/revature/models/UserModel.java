@@ -23,8 +23,6 @@ public class UserModel extends Model{
         this.email = email;
     }
 
-
-
     public UserModel(String userName, String passWord) {
         this.userName = userName;
         this.passWord = passWord;
@@ -54,7 +52,7 @@ public class UserModel extends Model{
         return userName;
     }
 
-    public int getRole() {
+    public int getRoleId() {
         return roleId;
     }
 
@@ -78,7 +76,7 @@ public class UserModel extends Model{
         this.userName = userName;
     }
 
-    public void setRole(int roleId) {
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 

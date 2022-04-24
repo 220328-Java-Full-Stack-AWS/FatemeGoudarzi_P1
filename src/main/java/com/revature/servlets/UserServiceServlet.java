@@ -33,17 +33,20 @@ public class UserServiceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserModel model = new UserModel(req.getHeader("user_name"));
+        UserModel model = new UserModel();
+        model.setUserName(req.getHeader("userName"));
+        model.setPassWord(req.getHeader("passWord"));
+        model= us.read(model);
         String json = mapper.writeValueAsString(model);
         resp.setContentType("application/json");
         resp.getWriter().print(json);
         System.out.println(model);
         resp.setStatus(200);
     }
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setStatus(201);
-        System.out.println("Inside Post");
         UserModel model = mapper.readValue(req.getInputStream() , UserModel.class);
         model = us.createAccount(model);
         String json = mapper.writeValueAsString(model);
