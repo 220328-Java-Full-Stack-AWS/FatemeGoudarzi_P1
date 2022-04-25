@@ -33,7 +33,7 @@ public class AuthorizationServlet extends HttpServlet {
                     String json = mapper.writeValueAsString(outputModel);
                     resp.getWriter().print(json);
                     resp.setHeader("access-control-expose-headers", "authToken");
-                    resp.setHeader("authToken", outputModel.getUserName());
+                    resp.setHeader("authToken", outputModel.getUserName());        
                     resp.setStatus(201);
                     break;
 

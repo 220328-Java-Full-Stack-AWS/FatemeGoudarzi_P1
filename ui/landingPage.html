@@ -17,27 +17,29 @@
         </div>
         <div class="main">
             <h4>New Reimbursement</h4>
-            <div class="contentBox">
-                <div class="flexColumn">
-                    <div class="flexRow">
-                        <label >Type options</label>
-                        <select id="reim-type" name="type">
+            <div class="content-box reim-form">
+                <div class="flex-column">
+                    <div class="flex-row">
+                        <label>Reimbursement Type: </label>
+                        <select class="reimb-type" id="reim-type" name="type">
                             <option value="1">Lodging</option>
                             <option value="2">Travel</option>
                             <option value="3">Food</option>
                             <option value="4">Other</option>
                         </select>
                     </div>
-                    <div class="flexRow">
+                    <div class="flex-row">
                         <label>Amount: </label>
                         <input type="number" id="amount" placeholder="amount" name="">
-                    </div>
-                    <div class="flexRow">
+                    </div>                       
+                    <div  class="flex-row">
                         <label>Description: </label>
                         <input type="textarea" id="description" placeholder="description" name="">
                     </div>
-                    <button class="btn submit" type="button" id="submit" placeholder="submit" name="">submit</button>
                 </div>
+
+            
+            <button class="btn submit" type="button" id="submit" placeholder="submit" name="">submit</button>
             </div>
 
         </div>
@@ -46,7 +48,7 @@
                 <h3>Reports</h3>
                 <ul >
                     <li>
-                        <button class="btn">all Reimbursements</button>
+                        <button class="btn"  name="">all Reimbursements</button>
                     </li>
                     <li>
                         <button class="btn">resolved Reimbursements</button>
@@ -65,13 +67,13 @@
             <div>
                 <ul class="links">
                     <li>
-                        <a >Register</a>
+                        <a onclick="clickHandler(this)" name="register">Register</a>
                     </li>
                     <li>
-                        <a >Settings</a>
+                        <a onclick="clickHandler(this)" name="settings">Settings</a>
                     </li>
                     <li>
-                        <a >Logout </a>
+                        <a onclick="clickHandler(this)" name="logout">Logout </a>
                     </li>
                 </ul>
             </div>
@@ -96,10 +98,25 @@
             let json = await response.json();
             console.log("Response: ", response);
             console.log("Response JSON: ", json);
-
             let header ="Welcome, " + json.firstName +" "+ json.lastName;
             document.getElementById("header-title").innerText = header;
         })(); 
+
+        function clickHandler(element){
+            let elm_name = element.name;
+            let roleId = localStorage.getItem("roleId").toLowerCase();
+            if(roleId == "admin" && elm_name=="register"){
+                window.location.href="./register.html";
+            }
+            else if(roleId != "admin" && elm_name=="register")
+            {
+                alert("You are not authorized to register an account!")
+            }
+            else if(elm_name=="settings"){
+                window.location.href="./settings.html";
+            }
+        }
+        
     </script>
 </body>
 

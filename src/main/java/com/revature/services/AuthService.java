@@ -51,6 +51,7 @@ public class AuthService {
      * After registration, the id will be a positive integer.
      */
     public UserModel register(UserModel userModelToBeRegistered) {
+        
         return null;
     }
 

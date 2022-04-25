@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <div class="login-form content-box">
-        <div class="flex-column">
+    <form class="login-form ">
+        <div class="context-box flex-column">
             <div class="flex-row">
                 <label>Username: </label>
                 <input type="text" id="username" placeholder="username" name="username">
@@ -20,10 +20,10 @@
                 <label>Password: </label>
                 <input type="password" id="password" placeholder="password" name="password">
             </div>
-            <button class="btn" onclick="submitForm()">Login</button>
+            <button class="btn" type="button" onclick="submitForm()">Login</button>
         </div>
+    </form>
 
-    </div>
 
     <!-- This imports a script file, in this case it imports the exported scripts from that file -->
     <script src="./scripts/userConnection.js"></script>
@@ -48,7 +48,6 @@
                 In this case we are getting a token that contains the username string, and storing it.
                 */
                 let token = response.headers.get("authToken");
-                console.log("authToken received: ", token);
                 localStorage.setItem("authToken", token);
 
                 //navigate the window to the landing page

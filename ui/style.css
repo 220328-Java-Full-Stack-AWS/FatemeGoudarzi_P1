@@ -62,14 +62,14 @@ Global Styles
 *,
 ::after,
 ::before {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 body {
+  padding: 0;
+  margin: 0;
   font-family: var(--ff-secondary);
   background: var(--clr-grey-10);
-  color: var(--clr-grey-2);
+  color: var(--clr-grey-1);
   line-height: 1.5;
   font-size: 0.875rem;
 }
@@ -83,9 +83,13 @@ a {
   text-decoration: none;
 }
 input{
-width:60%;
-padding-top:2%;
-padding-bottom:2%;
+width:40%;
+padding-top:1%;
+padding-bottom:1%;
+}
+
+input[type=textarea]{
+    width:90%;
 }
 
 h1,
@@ -145,21 +149,6 @@ p {
   padding: 20px 0;
 }
 
-/* section */
-.section {
-  padding: 5rem 0;
-}
-
-.section-center {
-  width: 90vw;
-  margin: 0 auto;
-  max-width: 1170px;
-}
-@media screen and (min-width: 992px) {
-  .contextBox {
-    width: 95vw;
-  }
-}
 main {
   min-height: 100vh;
   display: grid;
@@ -225,12 +214,11 @@ main {
 .links a:hover {
   background: var(--clr-primary-8);
   color: var(--clr-primary-5);
-  padding-left: 1.75rem;
 }
 .flex-column {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
   padding: 10px;
 }
 
@@ -243,20 +231,31 @@ main {
 
 .content-box {
   border:2px solid var(--clr-grey-1);
-  padding: 2%;
-  margin:2%;
+  padding:1%;
+  margin: auto;
 }
 .login-form{
     width:95vw;
     min-width: 350px;
-    align-self: center;
+    margin-top: 10%;
+    
 }
 
 .register-form{
     width:95vw;
     min-width: 350px;
-    align-self: center;
     }
+
+    .reim-form{
+      min-width: 150px;
+      border: none;
+      }
+
+ .reimb-type{
+  width:40vh;
+  padding-top:1%;
+  padding-bottom:1%;
+ }   
 
 @media all and (min-width:500px){
     .register-form{
@@ -266,4 +265,7 @@ main {
     width:40vw;
     }
 }
+
+
+
 
