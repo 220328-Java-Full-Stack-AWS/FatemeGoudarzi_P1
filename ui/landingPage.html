@@ -6,10 +6,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to ERS</title>
+    <link rel="stylesheet" type="text/css" href="./style.css">
 </head>
 
 <body>
     <p id="pageContent"></p>
+    <div class="grid-container">
+        <div class="header" style="background-color: var(--clr-grey-2);color: var(--clr-grey-10)">
+            <h3 id="header-title"></h3>
+        </div>
+        <div class="main">
+            <h4>New Reimbursement</h4>
+            <div class="contentBox">
+                <div class="flexColumn">
+                    <div class="flexRow">
+                        <label >Type options</label>
+                        <select id="reim-type" name="type">
+                            <option value="1">Lodging</option>
+                            <option value="2">Travel</option>
+                            <option value="3">Food</option>
+                            <option value="4">Other</option>
+                        </select>
+                    </div>
+                    <div class="flexRow">
+                        <label>Amount: </label>
+                        <input type="number" id="amount" placeholder="amount" name="">
+                    </div>
+                    <div class="flexRow">
+                        <label>Description: </label>
+                        <input type="textarea" id="description" placeholder="description" name="">
+                    </div>
+                    <button class="btn submit" type="button" id="submit" placeholder="submit" name="">submit</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="menu">
+            <div>
+                <h3>Reports</h3>
+                <ul >
+                    <li>
+                        <button class="btn">all Reimbursements</button>
+                    </li>
+                    <li>
+                        <button class="btn">resolved Reimbursements</button>
+                    </li>
+                    <li>
+                        <button class="btn">pending Reimbursements </button>
+                    </li>
+                    <li>
+                        <button class="btn">new Reimbursements </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="right">
+            <div>
+                <ul class="links">
+                    <li>
+                        <a >Register</a>
+                    </li>
+                    <li>
+                        <a >Settings</a>
+                    </li>
+                    <li>
+                        <a >Logout </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    <script type="text/javascript" src="js/home.js"></script>
 
     <!-- This imports a script file, in this case it imports the exported scripts from that file -->
     <script src="./scripts/userConnection.js"></script>
@@ -28,13 +97,8 @@
             console.log("Response: ", response);
             console.log("Response JSON: ", json);
 
-            let paragraph = document.getElementById("pageContent");
-            paragraph.innerHTML += "<h1>Welcome, "
-                + json.firstName
-                + "</h1><br>"
-                + json.lastName + ", " + json.firstName
-                + "<br> username: " + json.userName
-                + "<br> email: " + json.email
+            let header ="Welcome, " + json.firstName +" "+ json.lastName;
+            document.getElementById("header-title").innerText = header;
         })(); 
     </script>
 </body>
