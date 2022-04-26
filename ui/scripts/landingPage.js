@@ -1,7 +1,11 @@
+import{getUser} from "./userConnection.js";
+import{newReimbursement} from "./reimbursementConnection.js"
 
 const reimbSubmitBtn = document.getElementById('submit-reimb-btn');
+const registerElm = document.getElementById('register');
 
 reimbSubmitBtn.addEventListener('click',reimbCreate);
+registerElm.addEventListener('click',registerAccount)
 let authorizedUser = localStorage.getItem("authToken");
 console.log("authorizedUser: ", authorizedUser);
 
@@ -19,18 +23,12 @@ as soon as the function is defined it is called.
   document.getElementById("header-title").innerText = header;
 })(); 
 
-function clickHandler(element){
-  let elm_name = element.name;
+function registerAccount(){
   let roleId = localStorage.getItem("roleId").toLowerCase();
-  if(roleId == "admin" && elm_name=="register"){
+  if(roleId == "admin"){
       window.location.href="./register.html";
-  }
-  else if(roleId != "admin" && elm_name=="register")
-  {
-      alert("You are not authorized to register an account!")
-  }
-  else if(elm_name=="settings"){
-      window.location.href="./settings.html";
+  }  else {
+      alert("Sorry!You are not authorized to register an account!");
   }
 }
 

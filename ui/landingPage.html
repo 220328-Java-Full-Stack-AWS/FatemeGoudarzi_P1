@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to ERS</title>
     <link rel="stylesheet" type="text/css" href="./style.css">
+    <script type="module" defer src="./scripts/landingPage.js"></script>
+
 </head>
 
 <body>
@@ -46,7 +48,7 @@
                 <h3>Reports</h3>
                 <ul >
                     <li>
-                        <button class="btn" name="">all Reimbursements</button>
+                        <button class="btn" >all Reimbursements</button>
                     </li>
                     <li>
                         <button class="btn">resolved Reimbursements</button>
@@ -63,24 +65,24 @@
 
         <div class="right">
             <div>
+                <h3></h3>
+                <br>
                 <ul class="links">
                     <li>
-                        <a onclick="clickHandler(this)" name="register">Register</a>
+                        <button class="btn" id="register">Register</button>
                     </li>
                     <li>
-                        <a onclick="clickHandler(this)" name="settings">Settings</a>
+                        <button class="btn" id="settings">Settings</button>
                     </li>
                     <li>
-                        <a onclick="clickHandler(this)" name="logout">Logout </a>
+                        <button class="btn" id="logout">Log out</button>
                     </li>
                 </ul>
             </div>
         </div>
 
     </div>
-    <script type="text/javascript" src="./scripts/reimbursementConnection.js"></script>
-    <script type="text/javascript" src="./scripts/landingPage.js"></script>
-   
+
 </body>
 
 </html>

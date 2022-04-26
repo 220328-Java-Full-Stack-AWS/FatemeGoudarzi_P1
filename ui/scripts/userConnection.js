@@ -24,7 +24,7 @@ let newUser = {
 }
 
 */
-async function registerRequest(newUser) {
+export async function registerRequest(newUser) {
     let userResourceURL = "http://localhost:8080/P1/register";
     let response = await fetch(
         userResourceURL,
@@ -48,7 +48,7 @@ let authDto = {
     password: pw
 }
 */
-async function loginRequest(authDto) {
+export async function loginRequest(authDto) {
   let userResourceURL = "http://localhost:8080/P1/login";
     let response = await fetch(
         userResourceURL,
@@ -78,7 +78,7 @@ let user = {
     role: ro
 }
 */
-async function updateUserRequest(user) {
+export async function updateUserRequest(user) {
     
     let response = await fetch(
         userResourceURL,
@@ -94,7 +94,7 @@ async function updateUserRequest(user) {
     return response;
 }
 
-async function getUser(un) {
+export async function getUser(un) {
     let userResourceURL = `http://localhost:8080/P1/users`;
 
     let response = await fetch(
@@ -110,7 +110,7 @@ async function getUser(un) {
     return response;
 }
 
-async function deleteUser(un) {
+export async function deleteUser(un) {
     let response = await fetch(
         userResourceURL,
         {

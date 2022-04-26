@@ -4,7 +4,7 @@
 let reimbursementResourceURL = "http://localhost:8080/P1/reimbursement";
 //Note the context path is set to "/api" make sure to change that in the build config
 
-async function newReimbursement(newReimbursement) {
+export async function newReimbursement(newReimbursement) {
     let response = await fetch(
         reimbursementResourceURL,
         {
@@ -19,7 +19,7 @@ async function newReimbursement(newReimbursement) {
     return response;
 }
 
-async function getReimbursement(id) {
+export async function getReimbursement(id) {
     let response = await fetch(
         reimbursementResourceURL,
         {
@@ -33,7 +33,7 @@ async function getReimbursement(id) {
     return response;
 }
 
-async function updateReimbursement(reimbursement) {
+export async function updateReimbursement(reimbursement) {
     let response = await fetch(
         reimbursementResourceURL,
         {
@@ -48,7 +48,7 @@ async function updateReimbursement(reimbursement) {
     return response;
 }
 
-async function deleteReimbursement(reimbursement) {
+export async function deleteReimbursement(reimbursement) {
     let response = await fetch(
         reimbursementResourceURL,
         {
