@@ -46,14 +46,17 @@ async function reimbCreate(){
       "reimbursementTypeId":reimbType,
       "reimbursementDescription":description,
       "reimbursementAmount":amount,
-      "reimbursementCreator":localStorage.getItem("roleId")
+      "reimbursementCreator":localStorage.getItem("userId")
  }
  console.log(newReimbursementData);
  let response = await newReimbursement(newReimbursementData);
- if (response.status == 200) {
+ if (response.status == 201) {
       alert("Successfully Submitted!");
+      document.getElementById("reimb-type").value=101;
+      document.getElementById("amount").value='';
+      document.getElementById("description").value="";
   } else {
-      alert("Unable to log in! Check username and password!");
+      alert("Unable to submit!");
   }
 
 }
