@@ -10,8 +10,8 @@
 </head>
 
 <body>
-    <form class="login-form ">
-        <div class="context-box flex-column">
+    <form class="content-box login-form ">
+        <div class="flex-column">
             <div class="flex-row">
                 <label>Username: </label>
                 <input type="text" id="username" placeholder="username" name="username">
@@ -29,7 +29,8 @@
     <script src="./scripts/userConnection.js"></script>
 
     <script>
-        async function submitForm() {
+        async function submitForm(e) {
+        
             let authDto = {
                 userName: document.getElementById("username").value,
                 passWord: document.getElementById("password").value

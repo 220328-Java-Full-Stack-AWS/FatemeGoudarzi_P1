@@ -21,7 +21,7 @@
                 <div class="flex-column">
                     <div class="flex-row">
                         <label>Reimbursement Type: </label>
-                        <select class="reimb-type" id="reim-type" name="type">
+                        <select class="reimb-type" id="reimb-type" name="type" >
                             <option value="1">Lodging</option>
                             <option value="2">Travel</option>
                             <option value="3">Food</option>
@@ -37,9 +37,7 @@
                         <input type="textarea" id="description" placeholder="description" name="">
                     </div>
                 </div>
-
-            
-            <button class="btn submit" type="button" id="submit" placeholder="submit" name="">submit</button>
+            <button class="btn submit" type="button" id="submit-reimb-btn" name="">submit</button>
             </div>
 
         </div>
@@ -48,7 +46,7 @@
                 <h3>Reports</h3>
                 <ul >
                     <li>
-                        <button class="btn"  name="">all Reimbursements</button>
+                        <button class="btn" name="">all Reimbursements</button>
                     </li>
                     <li>
                         <button class="btn">resolved Reimbursements</button>
@@ -85,6 +83,9 @@
     <!-- This imports a script file, in this case it imports the exported scripts from that file -->
     <script src="./scripts/userConnection.js"></script>
     <script>
+          const reimSubmitBtn = document.getElementById('submit-reimb-btn');
+
+          reimSubmitBtn.addEventListener('click',reimbCreate);
         let authorizedUser = localStorage.getItem("authToken");
         console.log("authorizedUser: ", authorizedUser);
 
@@ -116,7 +117,28 @@
                 window.location.href="./settings.html";
             }
         }
+
+        function reimbCreate(){
+            let reimbType=document.getElementById("reimb-type").value;
+            let amount=document.getElementById("amount").value;
+            let description=document.getElementById("description").value;
+            console.log(reimbType, amount,description);
+            
+            const timeStamp = Date.now();
+            const reimbData=
+            {       
+                "creationDate": timeStamp,
+                "reimbursementTypeId":reimbType,
+                "reimbursementDescription":description,
+                "reimbursementAmount":amount,
+                "reimbursementCreator":localStorage.getItem("roleId")
+           }
+           console.log(reimbData)
+
+        }
         
+
+
     </script>
 </body>
 
