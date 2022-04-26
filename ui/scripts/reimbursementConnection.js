@@ -1,7 +1,7 @@
 
 //let reimbursementResourceURL = "http://localhost:port/contextpath/resourcepath"; //CHANGE ME!\
 //Example backend location:
-let reimbursementResourceURL = "http://localhost:8080/api/reimbursement";
+let reimbursementResourceURL = "http://localhost:8080/P1/reimbursement";
 //Note the context path is set to "/api" make sure to change that in the build config
 
 async function newReimbursement(newReimbursement) {
