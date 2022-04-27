@@ -1,6 +1,8 @@
 package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.exceptions.UsernameOrPassWordException;
+import com.revature.models.AuthResponse;
 import com.revature.models.UserModel;
 import com.revature.services.AuthService;
 import com.revature.services.UserService;
@@ -36,20 +38,19 @@ public class AuthorizationServlet extends HttpServlet {
                     resp.setHeader("authToken", outputModel.getUserName());        
                     resp.setStatus(201);
                     break;
-
                 case "login":
-                    outputModel = authService.login(model);
-                    String outPassWord = outputModel.getPassWord();
-                    String inPassWord = model.getPassWord();
-                    if(model.getUserName() != null & outPassWord.equals(inPassWord)) {
-                        json = mapper.writeValueAsString(outputModel);
-                        resp.setStatus(200);
-                        resp.getWriter().print(json);
-                        resp.setHeader("access-control-expose-headers", "authToken");
-                        resp.setHeader("authToken",model.getUserName() );
-                    } else {
-                        resp.setStatus(401);
-                    }
+                        UserModel loginResponse = authService.login(model);
+                        if(loginResponse.getUserId() > 0) {
+                            String loginJson = mapper.writeValueAsString(authService.mapToAuthResponse(loginResponse));
+                            resp.setStatus(200);
+                            resp.getWriter().print(loginJson);
+                            System.out.println(String.valueOf(loginResponse.getUserId()));
+                            resp.setHeader("access-control-expose-headers", "authToken");
+                            resp.setHeader("authToken", loginResponse.getUserName());
+
+                        } else {
+                            resp.setStatus(401, "User and Password do not match!");
+                        }
                     break;
                 default:
                     resp.setStatus(400);

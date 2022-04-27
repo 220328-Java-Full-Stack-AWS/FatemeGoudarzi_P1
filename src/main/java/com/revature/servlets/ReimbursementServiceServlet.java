@@ -17,7 +17,6 @@ public class ReimbursementServiceServlet extends HttpServlet {
     private ReimbursementService rs;
     private ObjectMapper mapper;
 
-
     @Override
     public void init() throws ServletException {
         System.out.println("hi. I'm inside of reimbursement servlet initializer!");

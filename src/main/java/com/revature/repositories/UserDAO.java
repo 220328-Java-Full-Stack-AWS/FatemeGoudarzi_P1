@@ -42,6 +42,7 @@ public class UserDAO implements CRUDInterface<UserModel>{
                 pstmt.setString(1, model.getUserName());
                 pstmt.setString(2, model.getPassWord());
                 ResultSet rs = pstmt.executeQuery();
+                ResultSet keys = pstmt.getGeneratedKeys();
                 while (rs.next()) {
                     outModel.setFirstName(rs.getString("first_name"));
                     outModel.setLastName(rs.getString("last_name"));
@@ -49,6 +50,7 @@ public class UserDAO implements CRUDInterface<UserModel>{
                     outModel.setEmail(rs.getString("email"));
                     outModel.setRoleId(rs.getInt("role_id"));
                     outModel.setPassWord(rs.getString("pass_word"));
+                    outModel.setUserId(rs.getInt("user_id"));
                 }
 
             } catch (SQLException e) {

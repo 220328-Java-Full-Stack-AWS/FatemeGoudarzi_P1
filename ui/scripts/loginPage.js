@@ -13,7 +13,7 @@ async function submitForm() {
     let response = await loginRequest(authDto);
 
     console.log("Response: ", response);
-    console.log("Response JSON: ", await response.json());
+    const result=  await response.json();
 
     if (response.status == 200) {
         /*
@@ -22,9 +22,9 @@ async function submitForm() {
         a string you can use to locally store information about the logged in user.
         In this case we are getting a token that contains the username string, and storing it.
         */
-        let token = response.headers.get("authToken");
-        localStorage.setItem("authToken", token);
-
+        localStorage.setItem("authToken", response.headers.get("authToken"));
+        localStorage.setItem("userId", result.userId);
+        localStorage.setItem("roleId", result.roleId);
         //navigate the window to the landing page
         window.location.href = "./landingPage.html";
 

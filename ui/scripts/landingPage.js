@@ -25,7 +25,7 @@ as soon as the function is defined it is called.
 
 function registerAccount(){
   let roleId = localStorage.getItem("roleId").toLowerCase();
-  if(roleId == "admin"){
+  if(roleId == 2){
       window.location.href="./register.html";
   }  else {
       alert("Sorry!You are not authorized to register an account!");

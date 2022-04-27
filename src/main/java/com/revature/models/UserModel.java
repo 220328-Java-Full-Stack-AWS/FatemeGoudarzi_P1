@@ -5,6 +5,7 @@ package com.revature.models;
  * extended functionality of the ERS application.
  */
 public class UserModel extends Model{
+    private int userId;
     private String firstName;
     private String lastName;
     private String userName;
@@ -15,7 +16,8 @@ public class UserModel extends Model{
     public UserModel() {
     }
 
-    public UserModel(String firstName, String lastName, String userName, String passWord, String email) {
+    public UserModel(int userId, String firstName, String lastName, String userName, String passWord, String email) {
+        this.userId=userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
@@ -52,6 +54,10 @@ public class UserModel extends Model{
         return userName;
     }
 
+    public int getUserId() {return userId;}
+
+    public void setUserId(int userId) {this.userId = userId;}
+
     public int getRoleId() {
         return roleId;
     }
@@ -80,10 +86,10 @@ public class UserModel extends Model{
         this.roleId = roleId;
     }
 
-
     @Override
     public String toString() {
         return "["+
+                "userId:" + userId  +
                 "firstName:" + firstName  +
                 " ,lastName:" + lastName  +
                 " ,userName:" + userName +

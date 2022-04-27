@@ -1,9 +1,8 @@
 package com.revature.services;
 
+import com.revature.models.AuthResponse;
 import com.revature.models.UserModel;
 import com.revature.repositories.UserDAO;
-
-import java.util.Optional;
 
 /**
  * The AuthService should handle login and registration for the ERS application.
@@ -33,8 +32,17 @@ public class AuthService {
      *     <li>Must return user object if the user logs in successfully.</li>
      * </ul>
      */
+
     public UserModel login(UserModel model) {
         return userDao.read(model);
+    }
+
+    public AuthResponse mapToAuthResponse(UserModel model) {
+        AuthResponse response = new AuthResponse();
+        response.setUserName(model.getUserName());
+        response.setUserId(model.getUserId());
+        response.setRoleId(model.getRoleId());
+        return response;
     }
 
     /**
@@ -51,7 +59,7 @@ public class AuthService {
      * After registration, the id will be a positive integer.
      */
     public UserModel register(UserModel userModelToBeRegistered) {
-        
+
         return null;
     }
 
@@ -60,9 +68,9 @@ public class AuthService {
      * It leverages the Optional type which is a useful interface to handle the
      * possibility of a user being unavailable.
      */
-    public Optional<UserModel> exampleRetrieveCurrentUser() {
-        return Optional.empty();
-    }
+//    public UserModel exampleRetrieveCurrentUser() {
+//        return null;
+//    }
 }
 
 
