@@ -7,14 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <script type="module" defer src="./scripts/loginPage.js"></script>
+    <script type="module" defer src="./scripts/login.js"></script>
 </head>
 
 <body>
     <form class="content-box login-form ">
         <div class="flex-column">
             <div class="flex-row">
-                <label>Username: </label>
+               <label>Username: </label>
                 <input type="text" id="username" placeholder="username" name="username">
             </div>
             <div class="flex-row">
@@ -24,7 +24,14 @@
             <button class="btn" type="button" id="login-btn">Login</button>
         </div>
     </form>
-
+    <div class="full-screen hidden" id="alert-window">
+        <div id="message-box" class="alert-window">
+            <p id="message-title" class="message-title"></p>
+            <button id="close-alert-btn">Close!</button>
+            <br>
+        </div>
+        
+    </div>
 </body>
 
 </html>

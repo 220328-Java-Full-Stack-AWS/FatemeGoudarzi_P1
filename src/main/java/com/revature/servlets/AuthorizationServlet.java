@@ -28,15 +28,23 @@ public class AuthorizationServlet extends HttpServlet {
         @Override
         protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             UserModel model = mapper.readValue(req.getInputStream(), UserModel.class);
-            UserModel outputModel = new UserModel();
+            UserModel outputModel;
             switch(req.getHeader("mode")) {
                 case "register":
                     outputModel = userService.createAccount(model);
-                    String json = mapper.writeValueAsString(outputModel);
-                    resp.getWriter().print(json);
-                    resp.setHeader("access-control-expose-headers", "authToken");
-                    resp.setHeader("authToken", outputModel.getUserName());        
-                    resp.setStatus(201);
+                    if(outputModel.getUserName()!=null){
+                        String json = mapper.writeValueAsString(outputModel);
+                        resp.getWriter().print(json);
+                        resp.setHeader("access-control-expose-headers", "authToken");
+                        resp.setHeader("authToken", outputModel.getUserName());
+                        resp.setStatus(201);
+                    }else{
+                        String loginErrorJson = mapper.writeValueAsString(new LoginRegisterErrors("Unsuccesfull operations!"));
+                        System.out.println(loginErrorJson);
+                        resp.getWriter().print(loginErrorJson);
+                        resp.setStatus(400);
+                    }
+
                     break;
                 case "login":
                         UserModel loginResponse = authService.login(model);
@@ -47,7 +55,6 @@ public class AuthorizationServlet extends HttpServlet {
                             System.out.println(String.valueOf(loginResponse.getUserId()));
                             resp.setHeader("access-control-expose-headers", "authToken");
                             resp.setHeader("authToken", loginResponse.getUserName());
-
                         } else {
                             String loginErrorJson = mapper.writeValueAsString(new LoginRegisterErrors("Username or password is wrong!"));
                             System.out.println(loginErrorJson);

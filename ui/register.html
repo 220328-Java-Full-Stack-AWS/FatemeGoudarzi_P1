@@ -15,26 +15,34 @@
         <div class="flex-column">
             <div class="flex-row">
                 <label>First name: </label>
-                <input type="text" id="firstName" placeholder="first name" name="">
+                <input type="text" id="firstname" placeholder="first name" name="">
             </div>
             <div class="flex-row">
                 <label>Last name: </label>
-                <input type="text" id="lastName" placeholder="last name" name="">
-            </div>
-            <div class="flex-row">
-                <label>Username: </label>
-                <input type="text" id="userName" placeholder="user name" name="">
+                <input type="text" id="lastname" placeholder="last name" name="">
             </div>
             <div class="flex-row">
                 <label>Password: </label>
                 <input type="password" id="password" placeholder="password" name="">
             </div>
             <div class="flex-row">
+                <label>user name</label>
+                <input type="text" id="username" placeholder="user name" readonly name="">
+            </div>
+            <div class="flex-row">
                 <label>Email: </label>
-                <input id="email" placeholder="email" name="">
+                <input id="email" placeholder="email" readonly name="">
             </div>
             <button class="btn" id="register-btn" >Register</button>
         </div>
+    </div>
+    <div class="full-screen hidden" id="alert-window">
+        <div id="message-box" class="alert-window">
+            <p id="message-title" class="message-title"></p>
+            <button id="close-alert-btn">Close!</button>
+            <br>
+        </div>
+        
     </div>
 </body>
 

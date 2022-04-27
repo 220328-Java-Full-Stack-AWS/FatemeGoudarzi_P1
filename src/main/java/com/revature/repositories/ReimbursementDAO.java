@@ -24,9 +24,9 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
             pstmt.setInt(5, model.getReimbursementCreator());
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
-            if(rs != null ){
-                model.setReimbursementId(rs.getInt("reimbursement_id"));
-            }
+//            if(rs != null ){
+//                model.setReimbursementId(rs.getInt("reimbursement_id"));
+//            }
         } catch(SQLException e) {
                 e.printStackTrace();
         }

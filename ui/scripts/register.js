@@ -1,13 +1,23 @@
 import {registerRequest} from "./userConnection.js";
+import {openAlertMessage,closeAlertMessage} from "./alertbox.js"
 const registerElm = document.getElementById("register-btn");
 registerElm.addEventListener('click',submitForm)
 
+
+
 async function submitForm() {
+    let firstName = document.getElementById("firstname").value;               
+    let lastName = document.getElementById("lastname").value
+    let randomNumber= Math.floor(Math.random()*1000)
+    let username =`${firstName}${lastName}${randomNumber}`
+    let email=`${username}@reva.com`             
+    document.getElementById("username").value=username;
+    document.getElementById("email").value=email;
     let newUser = {
-        firstName: document.getElementById("firstName").value,
-        lastName: document.getElementById("lastName").value,
-        userName: document.getElementById("userName").value,
-        email: document.getElementById("email").value,
+        firstName: firstName,
+        lastName: lastName,
+        userName: username,
+        email: email,
         passWord: document.getElementById("password").value
     }
     console.log(newUser);
@@ -18,12 +28,12 @@ async function submitForm() {
     console.log("Response JSON: ", response.json());
 
     if (response.status == 201) {
-        alert("user account successfully created.")
+        openAlertMessage("user account successfully created.");
         //navigate the window to the landing page
-         window.location.href = "./landingPage.html";
+         //window.location.href = "./landingPage.html";
 
     } else {
-        alert("Unable to register!");
+        openAlertMessage("Unable to register!");
     }
 
 }

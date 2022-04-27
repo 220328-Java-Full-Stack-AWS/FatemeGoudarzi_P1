@@ -1,4 +1,5 @@
-import {loginRequest} from "./userConnection.js"
+import {loginRequest} from "./userConnection.js";
+import {openAlertMessage,closeAlertMessage} from "./alertbox.js"
 
 const loginElm = document.getElementById("login-btn");
 loginElm.addEventListener('click',submitForm)
@@ -9,9 +10,8 @@ async function submitForm() {
         userName: document.getElementById("username").value,
         passWord: document.getElementById("password").value
     }
-    try{
+   
         let response = await loginRequest(authDto);
-
         console.log("Response: ", response);
         const result=  await response.json();
     
@@ -23,10 +23,8 @@ async function submitForm() {
             window.location.href = "./landingPage.html";
     
         } else if(response.status ==401) {
-            alert("Unable to log in! Check username and password!");
+            openAlertMessage("Unable to log in! Check your username and password!");
         }
-    }catch{
-        
-    }
+
    
 }

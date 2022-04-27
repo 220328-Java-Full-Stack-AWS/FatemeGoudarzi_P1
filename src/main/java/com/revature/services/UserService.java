@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.models.UserModel;
 import com.revature.repositories.UserDAO;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +32,9 @@ import java.util.List;
 
 
 	public UserModel createAccount(UserModel model){
-		return userDao.create(model);
+
+
+			return userDao.create(model);
 	}
 
 	/**
