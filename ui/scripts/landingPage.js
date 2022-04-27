@@ -9,11 +9,6 @@ registerElm.addEventListener('click',registerAccount)
 let authorizedUser = localStorage.getItem("authToken");
 console.log("authorizedUser: ", authorizedUser);
 
-/*
-This is a self-invoking function. To build one, wrap the function declaration in ()
-then add another pair of () at the end to act as the parameter list. Effectively
-as soon as the function is defined it is called.
-*/
 (async function displayUser() {
   let response = await getUser(authorizedUser);
   let json = await response.json();
@@ -48,8 +43,12 @@ async function reimbCreate(){
  }
  console.log(newReimbursementData);
  let response = await newReimbursement(newReimbursementData);
+ const result=  await response.json();
+ console.log("Response: ", response);
+ 
+
  if (response.status == 201) {
-      alert("Successfully Submitted!");
+      alert(`Successfully Submitted!\n Your reimbursment Id is : result.${response.reimbursementId}`);
       document.getElementById("reimb-type").value=101;
       document.getElementById("amount").value='';
       document.getElementById("description").value="";

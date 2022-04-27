@@ -1,9 +1,12 @@
 package com.revature;
 
 
-import com.revature.models.UserModel;
-import com.revature.services.AuthService;
-import com.revature.services.UserService;
+import com.revature.models.ReimbursementModel;
+import com.revature.services.ReimbursementService;
+
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 
 public class Driver {
 
@@ -26,19 +29,27 @@ public class Driver {
 
 //
 //        //Login
-        UserService us3 = new UserService();
-        AuthService authService  = new AuthService();
-        UserModel outputModel  = new UserModel();
-        UserModel model  = new UserModel("SaraSmith","superStrong");
-        outputModel = us3.read(model);
-        System.out.println(outputModel);
-
-
-
+//        UserService us3 = new UserService();
+//        AuthService authService  = new AuthService();
+//        UserModel outputModel  = new UserModel();
+//        UserModel model  = new UserModel("SaraSmith","superStrong");
+//        outputModel = us3.read(model);
+//        System.out.println(outputModel);
 
         //Make a new request
-//        ReimbursementService rs = new ReimbursementService();
-//        System.out.println(rs.create());
+        ReimbursementModel rm = new ReimbursementModel();
+        ReimbursementService rs= new ReimbursementService();
+        Timestamp currentMoment = new Timestamp(System.currentTimeMillis());
+        rm.setCreationDate(currentMoment);
+        rm.setReimbursementDescription("description");
+        rm.setReimbursementTypeId(201);
+        rm.setReimbursementCreator(24);
+        rm.setReimbursementAmount(BigDecimal.valueOf(100));
+        try {
+            System.out.println(rs.createReimbursement(rm));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
         //Approve a request
 //        ReimbursementService rs = new ReimbursementService();

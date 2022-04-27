@@ -26,5 +26,4 @@ async function submitForm() {
         alert("Unable to register!");
     }
 
-    //console.log(response);
 }

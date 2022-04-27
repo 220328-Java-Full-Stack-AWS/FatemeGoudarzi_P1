@@ -1,8 +1,7 @@
 package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.exceptions.UsernameOrPassWordException;
-import com.revature.models.AuthResponse;
+import com.revature.mis.LoginRegisterErrors;
 import com.revature.models.UserModel;
 import com.revature.services.AuthService;
 import com.revature.services.UserService;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
 
 public class AuthorizationServlet extends HttpServlet {
         private AuthService authService;
@@ -49,7 +49,10 @@ public class AuthorizationServlet extends HttpServlet {
                             resp.setHeader("authToken", loginResponse.getUserName());
 
                         } else {
-                            resp.setStatus(401, "User and Password do not match!");
+                            String loginErrorJson = mapper.writeValueAsString(new LoginRegisterErrors("Username or password is wrong!"));
+                            System.out.println(loginErrorJson);
+                            resp.getWriter().print(loginErrorJson);
+                            resp.setStatus(401);
                         }
                     break;
                 default:

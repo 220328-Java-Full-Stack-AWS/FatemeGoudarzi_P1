@@ -2,15 +2,14 @@ package com.revature.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.ReimbursementModel;
-import com.revature.models.UserModel;
 import com.revature.services.ReimbursementService;
-import com.revature.services.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ReimbursementServiceServlet extends HttpServlet {
@@ -27,9 +26,14 @@ public class ReimbursementServiceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
          resp.setStatus(200);
-         List model = rs.getAllReimbursements();
-         String json = mapper.writeValueAsString(model);
-         resp.getWriter().print(json);
+         try{
+             List model = rs.getAllReimbursements();
+             String json = mapper.writeValueAsString(model);
+             resp.getWriter().print(json);
+         }catch (SQLException e) {
+             e.printStackTrace();
+         }
+
     }
 
 //    @Override
@@ -44,20 +48,30 @@ public class ReimbursementServiceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             System.out.println("Inside Post");
             ReimbursementModel model = mapper.readValue(req.getInputStream(), ReimbursementModel.class);
+        try {
             model = rs.createReimbursement(model);
             String json = mapper.writeValueAsString(model);
             System.out.println(json);
             resp.getWriter().print(json);
             resp.setStatus(201);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("Inside Post");
         ReimbursementModel model = mapper.readValue(req.getInputStream(), ReimbursementModel.class);
-        model = rs.updateReimbursement(model);
-        String json = mapper.writeValueAsString(model);
-        resp.getWriter().print(json);
-        resp.setStatus(201);
+        try {
+            model = rs.updateReimbursement(model);
+            String json = mapper.writeValueAsString(model);
+            resp.getWriter().print(json);
+            resp.setStatus(201);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import com.revature.models.ReimbursementModel;
 import com.revature.util.ConnectionManager;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,27 +12,30 @@ import java.util.List;
 public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
 
     @Override
-
-    public ReimbursementModel create(ReimbursementModel model) {
+    public ReimbursementModel create(ReimbursementModel model) throws SQLException {
+        ResultSet rs ;
         String SQL = "INSERT INTO public.reimbursement (reimbursement_creation_date, reimbursement_type_id, reimbursement_description,reimbursement_amount, reimbursement_creator) VALUES(?,?, ?, ?,?)";
         try{
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
-            pstmt.setTimestamp(1,model.getCreationDate());
-            pstmt.setInt(2,model.getReimbursementTypeId());
-            pstmt.setString(3,model.getReimbursementDescription());
-            pstmt.setBigDecimal(4,model.getReimbursementAmount());
-            pstmt.setInt(5,model.getReimbursementCreator());
-            int rs = pstmt.executeUpdate();
-            System.out.println(SQL);
+            pstmt.setTimestamp(1, model.getCreationDate());
+            pstmt.setInt(2, model.getReimbursementTypeId());
+            pstmt.setString(3, model.getReimbursementDescription());
+            pstmt.setBigDecimal(4, model.getReimbursementAmount());
+            pstmt.setInt(5, model.getReimbursementCreator());
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if(rs != null ){
+                model.setReimbursementId(rs.getInt("reimbursement_id"));
+            }
+        } catch(SQLException e) {
+                e.printStackTrace();
         }
-        catch(SQLException e){
-             e.printStackTrace();
-        }
+        System.out.println(model);
         return model;
     }
 
     @Override
-    public ReimbursementModel update(ReimbursementModel model) {
+    public ReimbursementModel update(ReimbursementModel model) throws SQLException {
             String SQL = "Update public.reimbursement set reimbursement_status_id=? , reimbursement_resolution_date=? ,reimbursement_resolver=?  WHERE reimbursement_id = ?";
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
@@ -49,7 +53,7 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
     }
 
     @Override
-    public List<ReimbursementModel> getAll() {
+    public List<ReimbursementModel> getAll() throws SQLException{
         List list = new ArrayList();
         try {
             String SQL = "SELECT * FROM public.reimbursement";

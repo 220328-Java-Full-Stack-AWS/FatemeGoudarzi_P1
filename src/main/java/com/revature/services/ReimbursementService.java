@@ -1,12 +1,9 @@
 package com.revature.services;
 
 import com.revature.models.ReimbursementModel;
-import com.revature.models.UserModel;
 import com.revature.repositories.ReimbursementDAO;
-import com.revature.repositories.UserDAO;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -52,7 +49,7 @@ public class ReimbursementService {
     }
 
     /**Retrieve all reimbursements.*/
-    public List<ReimbursementModel> getAllReimbursements() {
+    public List<ReimbursementModel> getAllReimbursements() throws SQLException {
         reimbDao.getAll();
         return reimbDao.getAll();
     }
@@ -68,12 +65,12 @@ public class ReimbursementService {
     }
 
     /**Create a reimbursement request. */
-    public ReimbursementModel createReimbursement(ReimbursementModel model){
+    public ReimbursementModel createReimbursement(ReimbursementModel model) throws SQLException {
         return reimbDao.create(model);
     }
 
     /**Update a reimbursement request. */
-    public ReimbursementModel updateReimbursement(ReimbursementModel model){
+    public ReimbursementModel updateReimbursement(ReimbursementModel model) throws SQLException {
         return reimbDao.update(model);
     }
 
@@ -100,7 +97,7 @@ public class ReimbursementService {
 //    }
 
 
-    public ReimbursementModel read(ReimbursementModel model) {
+    public ReimbursementModel read(ReimbursementModel model) throws SQLException {
         return reimbDao.read(model);
     }
 

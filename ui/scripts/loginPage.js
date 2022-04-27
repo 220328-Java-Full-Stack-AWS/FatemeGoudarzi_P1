@@ -9,26 +9,24 @@ async function submitForm() {
         userName: document.getElementById("username").value,
         passWord: document.getElementById("password").value
     }
+    try{
+        let response = await loginRequest(authDto);
 
-    let response = await loginRequest(authDto);
-
-    console.log("Response: ", response);
-    const result=  await response.json();
-
-    if (response.status == 200) {
-        /*
-        For this to work, you must send back a token in the header of the response
-        The key should match the shown key name "authToken" and the value should be
-        a string you can use to locally store information about the logged in user.
-        In this case we are getting a token that contains the username string, and storing it.
-        */
-        localStorage.setItem("authToken", response.headers.get("authToken"));
-        localStorage.setItem("userId", result.userId);
-        localStorage.setItem("roleId", result.roleId);
-        //navigate the window to the landing page
-        window.location.href = "./landingPage.html";
-
-    } else {
-        alert("Unable to logasas in! Check username and password!");
+        console.log("Response: ", response);
+        const result=  await response.json();
+    
+        if (response.status == 200) {
+            localStorage.setItem("authToken", response.headers.get("authToken"));
+            localStorage.setItem("userId", result.userId);
+            localStorage.setItem("roleId", result.roleId);
+            //navigate the window to the landing page
+            window.location.href = "./landingPage.html";
+    
+        } else if(response.status ==401) {
+            alert("Unable to log in! Check username and password!");
+        }
+    }catch{
+        
     }
+   
 }
