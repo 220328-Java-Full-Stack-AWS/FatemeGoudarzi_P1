@@ -1,11 +1,16 @@
 import{getUser} from "./userConnection.js";
-import{newReimbursement} from "./reimbursementConnection.js"
+import{newReimbursement,getAllReimbursement} from "./reimbursementConnection.js"
 
 const reimbSubmitBtn = document.getElementById('submit-reimb-btn');
 const registerElm = document.getElementById('register');
-
+const allReimbElm = document.getElementById('all-reimb-btn');
+let reimb =[];
 reimbSubmitBtn.addEventListener('click',reimbCreate);
-registerElm.addEventListener('click',registerAccount)
+registerElm.addEventListener('click',registerAccount);
+allReimbElm.addEventListener('click', () => {
+  window.location.href = "./report.html";
+});
+
 let authorizedUser = localStorage.getItem("authToken");
 console.log("authorizedUser: ", authorizedUser);
 

@@ -20,7 +20,7 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
             pstmt.setTimestamp(1, model.getCreationDate());
             pstmt.setInt(2, model.getReimbursementTypeId());
             pstmt.setString(3, model.getReimbursementDescription());
-            pstmt.setBigDecimal(4, model.getReimbursementAmount());
+            pstmt.setDouble(4, model.getReimbursementAmount());
             pstmt.setInt(5, model.getReimbursementCreator());
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
@@ -66,7 +66,7 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
                         rs.getTimestamp("reimbursement_resolution_date"),
                         rs.getInt("reimbursement_type_id"),
                         rs.getString("reimbursement_description"),
-                        rs.getBigDecimal("reimbursement_amount"),
+                        rs.getDouble("reimbursement_amount"),
                         rs.getInt("reimbursement_status_id"),
                         rs.getInt("reimbursement_creator"),
                         rs.getInt("reimbursement_resolver")
@@ -95,7 +95,7 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
                         rs.getTimestamp("reimbursement_resolution_date"),
                         rs.getInt("reimbursement_type_id"),
                         rs.getString("reimbursement_description"),
-                        rs.getBigDecimal("reimbursement_amount"),
+                        rs.getDouble("reimbursement_amount"),
                         rs.getInt("reimbursement_status_id"),
                         rs.getInt("reimbursement_creator"),
                         rs.getInt("reimbursement_resolver")
@@ -125,7 +125,7 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
                         rs.getTimestamp("reimbursement_resolution_date"),
                         rs.getInt("reimbursement_type_id"),
                         rs.getString("reimbursement_description"),
-                        rs.getBigDecimal("reimbursement_amount"),
+                        rs.getDouble("reimbursement_amount"),
                         rs.getInt("reimbursement_status_id"),
                         rs.getInt("reimbursement_creator"),
                         rs.getInt("reimbursement_resolver")

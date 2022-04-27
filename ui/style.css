@@ -79,6 +79,21 @@ ul {
 li{
   width:98%;
 }
+
+table{
+  left:50%;
+  transform: translateX(50%);
+  border: 1px solid;
+}
+thead{
+  border: 1px solid;
+  background-color: var(--clr-grey-3);
+  color:var(--clr-white);
+}
+td{
+  padding: 3px;
+}
+
 a {
   text-decoration: none;
 }

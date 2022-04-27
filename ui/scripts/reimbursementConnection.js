@@ -16,6 +16,20 @@ export async function newReimbursement(newReimbursement) {
     return response;
 }
 
+export async function getAllReimbursement() {
+    let response = await fetch(
+        reimbursementResourceURL,
+        {
+            method: "GET",
+            headers: {
+            }
+        }
+    );
+    
+
+    return await response.json();
+}
+
 export async function getReimbursement(id) {
     let response = await fetch(
         reimbursementResourceURL,

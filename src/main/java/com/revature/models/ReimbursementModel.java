@@ -1,5 +1,4 @@
 package com.revature.models;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class ReimbursementModel extends Model{
@@ -8,7 +7,7 @@ public class ReimbursementModel extends Model{
     private Timestamp resolutionDate;
     private int reimbursementTypeId;
     private String reimbursementDescription;
-    private BigDecimal reimbursementAmount;
+    private double reimbursementAmount;
     private int reimbursementStatus;
     private int reimbursementCreator;
     private int reimbursementResolver;
@@ -23,7 +22,7 @@ public class ReimbursementModel extends Model{
         this.reimbursementResolver=resolver;
     }
 
-    public ReimbursementModel(int id, Timestamp creationDate, Timestamp resolutionDate, int typeId,String description, BigDecimal amount, int status, int creator, int resolver) {
+    public ReimbursementModel(int id, Timestamp creationDate, Timestamp resolutionDate, int typeId,String description, double amount, int status, int creator, int resolver) {
         this.reimbursementId=id;
         this.creationDate = creationDate;
         this.resolutionDate = resolutionDate;
@@ -55,7 +54,7 @@ public class ReimbursementModel extends Model{
         return reimbursementDescription;
     }
 
-    public BigDecimal getReimbursementAmount() {
+    public double getReimbursementAmount() {
         return reimbursementAmount;
     }
 
@@ -90,7 +89,7 @@ public class ReimbursementModel extends Model{
         this.reimbursementDescription = reimbursementDescription;
     }
 
-    public void setReimbursementAmount(java.math.BigDecimal reimbursementAmount) {
+    public void setReimbursementAmount(double reimbursementAmount) {
         this.reimbursementAmount = reimbursementAmount;
     }
 

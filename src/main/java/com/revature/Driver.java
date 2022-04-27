@@ -1,16 +1,14 @@
 package com.revature;
 
 
-import com.revature.models.ReimbursementModel;
+import com.revature.repositories.ReimbursementDAO;
 import com.revature.services.ReimbursementService;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public class Driver {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
 
 //
@@ -37,27 +35,28 @@ public class Driver {
 //        System.out.println(outputModel);
 
         //Make a new request
-        ReimbursementModel rm = new ReimbursementModel();
-        ReimbursementService rs= new ReimbursementService();
-        Timestamp currentMoment = new Timestamp(System.currentTimeMillis());
-        rm.setCreationDate(currentMoment);
-        rm.setReimbursementDescription("description");
-        rm.setReimbursementTypeId(201);
-        rm.setReimbursementCreator(24);
-        rm.setReimbursementAmount(BigDecimal.valueOf(100));
-        try {
-            System.out.println(rs.createReimbursement(rm));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        ReimbursementModel rm = new ReimbursementModel();
+//        ReimbursementService rs= new ReimbursementService();
+//        Timestamp currentMoment = new Timestamp(System.currentTimeMillis());
+//        rm.setCreationDate(currentMoment);
+//        rm.setReimbursementDescription("description");
+//        rm.setReimbursementTypeId(201);
+//        rm.setReimbursementCreator(24);
+//        rm.setReimbursementAmount(BigDecimal.valueOf(100));
+//        try {
+//            System.out.println(rs.createReimbursement(rm));
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
 
         //Approve a request
 //        ReimbursementService rs = new ReimbursementService();
 //        System.out.println(rs.update());
 
         //Get a list of all requests
-//          RequestDAO rs = new RequestDAO();
-//          System.out.println(rs.getAll());
+        ReimbursementDAO rd = new ReimbursementDAO();
+        ReimbursementService rs = new ReimbursementService();
+        System.out.println(rs.getAllReimbursements());
 
         //Get a list of approved requests
 //        RequestDAO rs = new RequestDAO();

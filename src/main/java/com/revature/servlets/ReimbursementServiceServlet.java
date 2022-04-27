@@ -25,15 +25,14 @@ public class ReimbursementServiceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-         resp.setStatus(200);
          try{
              List model = rs.getAllReimbursements();
              String json = mapper.writeValueAsString(model);
              resp.getWriter().print(json);
+             resp.setStatus(200);
          }catch (SQLException e) {
              e.printStackTrace();
          }
-
     }
 
 //    @Override
