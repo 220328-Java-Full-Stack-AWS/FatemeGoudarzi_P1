@@ -4,11 +4,15 @@ import{newReimbursement,getAllReimbursement} from "./reimbursementConnection.js"
 const reimbSubmitBtn = document.getElementById('submit-reimb-btn');
 const registerElm = document.getElementById('register');
 const allReimbElm = document.getElementById('all-reimb-btn');
-let reimb =[];
+const logoutElm = document.getElementById('logout');
+
 reimbSubmitBtn.addEventListener('click',reimbCreate);
 registerElm.addEventListener('click',registerAccount);
 allReimbElm.addEventListener('click', () => {
   window.location.href = "./report.html";
+});
+logoutElm.addEventListener('click', () => {
+  window.location.href = "./login.html";
 });
 
 let authorizedUser = localStorage.getItem("authToken");
@@ -53,7 +57,7 @@ async function reimbCreate(){
  
 
  if (response.status == 201) {
-      alert(`Successfully Submitted!\n Your reimbursment Id is : result.${response.reimbursementId}`);
+      alert(`Successfully Submitted!`);
       document.getElementById("reimb-type").value=101;
       document.getElementById("amount").value='';
       document.getElementById("description").value="";

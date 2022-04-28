@@ -17,16 +17,18 @@ export async function newReimbursement(newReimbursement) {
 }
 
 export async function getAllReimbursement() {
+    const roleId = window.localStorage.getItem("roleId")
     let response = await fetch(
         reimbursementResourceURL,
         {
             method: "GET",
-            headers: {
+            headers: 
+                { ... roleId === "2" ? 
+                 {} :
+                 { creator_id : window.localStorage.getItem("userId")}
             }
         }
     );
-    
-
     return await response.json();
 }
 
@@ -45,6 +47,8 @@ export async function getReimbursement(id) {
 }
 
 export async function updateReimbursement(reimbursement) {
+    reimbursement.reimbursementResolver = window.localStorage.getItem("userId");
+    reimbursement.resolutionDate = Date.now();
     let response = await fetch(
         reimbursementResourceURL,
         {
@@ -56,20 +60,17 @@ export async function updateReimbursement(reimbursement) {
         }
     );
 
-    return response;
+    return await response.json();
 }
 
-export async function deleteReimbursement(reimbursement) {
-    let response = await fetch(
+export async function deleteReimbursement(reimbursementId) {
+    await fetch(
         reimbursementResourceURL,
         {
             method: "DELETE",
             headers: {
-                "Content-Type": "application/json"
+                reimbursement_id : reimbursementId
             },
-            body: JSON.stringify(reimbursement)
         }
     );
-
-    return response;
 }

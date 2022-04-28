@@ -50,19 +50,23 @@ public class ReimbursementService {
 
     /**Retrieve all reimbursements.*/
     public List<ReimbursementModel> getAllReimbursements() throws SQLException {
-        reimbDao.getAll();
         return reimbDao.getAll();
     }
 
     /**Retrieve and filter reimbursements based on status.*/
-    public List<ReimbursementModel> getReimbursementsByStatus(String status) {
+    public List<ReimbursementModel> getReimbursementsByStatus(String status) throws SQLException {
         return reimbDao.getAll(status);
     }
 
     /**Retrieve and filter reimbursements based on status and creator_id.*/
-    public List<ReimbursementModel> getReimbursementsByStatusById(String status, int creatorId) {
+    public List<ReimbursementModel> getReimbursementsByStatusById(String status, int creatorId) throws SQLException{
         return reimbDao.getAll(status , creatorId);
     }
+
+    public List<ReimbursementModel> getReimbursementsByCreatorById(int creatorId) throws SQLException{
+        return reimbDao.getAll(creatorId);
+    }
+
 
     /**Create a reimbursement request. */
     public ReimbursementModel createReimbursement(ReimbursementModel model) throws SQLException {
@@ -74,6 +78,9 @@ public class ReimbursementService {
         return reimbDao.update(model);
     }
 
+    public void deleteReimbursements(int id) throws SQLException {
+        reimbDao.delete(id);
+    }
 
 //    public ReimbursementModel create() {
 //        ReimbursementDAO reimbursementDao = new ReimbursementDAO();

@@ -327,5 +327,10 @@ main {
  margin-bottom: .75rem;
 }
 
-
+.reimbursementApproved {
+  background-color: var(--clr-green-light);
+}
+.reimbursementDenied {
+  background-color: var(--clr-red-light);
+}
 

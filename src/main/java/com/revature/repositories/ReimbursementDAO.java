@@ -30,119 +30,127 @@ public class ReimbursementDAO implements CRUDInterface<ReimbursementModel> {
         } catch(SQLException e) {
                 e.printStackTrace();
         }
-        System.out.println(model);
+
         return model;
     }
 
     @Override
     public ReimbursementModel update(ReimbursementModel model) throws SQLException {
-            String SQL = "Update public.reimbursement set reimbursement_status_id=? , reimbursement_resolution_date=? ,reimbursement_resolver=?  WHERE reimbursement_id = ?";
-        try {
-            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
-            pstmt.setInt(1, model.getReimbursementStatus());
-            pstmt.setTimestamp(2,model.getResolutionDate());
-            pstmt.setInt(3,model.getReimbursementResolver());
-            pstmt.setInt(4, model.getReimbursementId());
-            System.out.println(pstmt);
-            pstmt.executeUpdate();
-            System.out.println(pstmt.executeUpdate());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        String SQL = "Update public.reimbursement set " +
+                "reimbursement_status_id=? , reimbursement_resolution_date=? ,reimbursement_resolver=?  WHERE reimbursement_id = ?";
+
+        PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+        pstmt.setInt(1, model.getReimbursementStatus());
+        pstmt.setTimestamp(2,model.getResolutionDate());
+        pstmt.setInt(3,model.getReimbursementResolver());
+        pstmt.setInt(4, model.getReimbursementId());
+        pstmt.executeUpdate();
+
         return model;
     }
 
     @Override
     public List<ReimbursementModel> getAll() throws SQLException{
         List list = new ArrayList();
-        try {
-            String SQL = "SELECT * FROM public.reimbursement";
-            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                ReimbursementModel model = new ReimbursementModel(
-                        rs.getInt("reimbursement_id"),
-                        rs.getTimestamp("reimbursement_creation_date"),
-                        rs.getTimestamp("reimbursement_resolution_date"),
-                        rs.getInt("reimbursement_type_id"),
-                        rs.getString("reimbursement_description"),
-                        rs.getDouble("reimbursement_amount"),
-                        rs.getInt("reimbursement_status_id"),
-                        rs.getInt("reimbursement_creator"),
-                        rs.getInt("reimbursement_resolver")
-                        );
-                list.add(model);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String SQL = "SELECT * FROM public.reimbursement";
+        PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            ReimbursementModel model = new ReimbursementModel(
+                    rs.getInt("reimbursement_id"),
+                    rs.getTimestamp("reimbursement_creation_date"),
+                    rs.getTimestamp("reimbursement_resolution_date"),
+                    rs.getInt("reimbursement_type_id"),
+                    rs.getString("reimbursement_description"),
+                    rs.getDouble("reimbursement_amount"),
+                    rs.getInt("reimbursement_status_id"),
+                    rs.getInt("reimbursement_creator"),
+                    rs.getInt("reimbursement_resolver")
+                    );
+            list.add(model);
         }
-
         return list;
     }
 
-    public List<ReimbursementModel> getAll(String status) {
+    public List<ReimbursementModel> getAll(String status) throws SQLException{
         List list = new ArrayList();
-        try {
-            String SQL = "SELECT * FROM public.reimbursement where reimbursement_status=? ";
-            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
-            pstmt.setString(1,status);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                ReimbursementModel model = new ReimbursementModel(
-                        rs.getInt("reimbursement_id"),
-                        rs.getTimestamp("reimbursement_creation_date"),
-                        rs.getTimestamp("reimbursement_resolution_date"),
-                        rs.getInt("reimbursement_type_id"),
-                        rs.getString("reimbursement_description"),
-                        rs.getDouble("reimbursement_amount"),
-                        rs.getInt("reimbursement_status_id"),
-                        rs.getInt("reimbursement_creator"),
-                        rs.getInt("reimbursement_resolver")
-                );
-                list.add(model);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String SQL = "SELECT * FROM public.reimbursement where reimbursement_status=?";
+        PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+        pstmt.setString(1,status);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            ReimbursementModel model = new ReimbursementModel(
+                    rs.getInt("reimbursement_id"),
+                    rs.getTimestamp("reimbursement_creation_date"),
+                    rs.getTimestamp("reimbursement_resolution_date"),
+                    rs.getInt("reimbursement_type_id"),
+                    rs.getString("reimbursement_description"),
+                    rs.getDouble("reimbursement_amount"),
+                    rs.getInt("reimbursement_status_id"),
+                    rs.getInt("reimbursement_creator"),
+                    rs.getInt("reimbursement_resolver")
+            );
+            list.add(model);
         }
+
 
         return list;
     }
 
-    public List<ReimbursementModel> getAll(String status , int creatorId) {
+    public List<ReimbursementModel> getAll(String status , int creatorId) throws SQLException{
         List list = new ArrayList();
-        try {
-            String SQL = "SELECT * FROM public.reimbursement where reimbursement_status=? AND reimbursement_creator=? ";
-            PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
-            pstmt.setString(1,status);
-            pstmt.setInt(2,creatorId);
-            ResultSet rs = pstmt.executeQuery();
-            while (rs.next()) {
-                ReimbursementModel model = new ReimbursementModel(
-                        rs.getInt("reimbursement_id"),
-                        rs.getTimestamp("reimbursement_creation_date"),
-                        rs.getTimestamp("reimbursement_resolution_date"),
-                        rs.getInt("reimbursement_type_id"),
-                        rs.getString("reimbursement_description"),
-                        rs.getDouble("reimbursement_amount"),
-                        rs.getInt("reimbursement_status_id"),
-                        rs.getInt("reimbursement_creator"),
-                        rs.getInt("reimbursement_resolver")
-                );
-                list.add(model);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
+        String SQL = "SELECT * FROM public.reimbursement where reimbursement_status=? AND reimbursement_creator=? ";
+        PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+        pstmt.setString(1,status);
+        pstmt.setInt(2,creatorId);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            ReimbursementModel model = new ReimbursementModel(
+                    rs.getInt("reimbursement_id"),
+                    rs.getTimestamp("reimbursement_creation_date"),
+                    rs.getTimestamp("reimbursement_resolution_date"),
+                    rs.getInt("reimbursement_type_id"),
+                    rs.getString("reimbursement_description"),
+                    rs.getDouble("reimbursement_amount"),
+                    rs.getInt("reimbursement_status_id"),
+                    rs.getInt("reimbursement_creator"),
+                    rs.getInt("reimbursement_resolver")
+            );
+            list.add(model);
         }
 
         return list;
     }
+    public List<ReimbursementModel> getAll(int creatorId)  throws SQLException {
+        List list = new ArrayList();
 
+        String SQL = "SELECT * FROM public.reimbursement where reimbursement_creator=? ";
+        PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+        pstmt.setInt(1,creatorId);
+        ResultSet rs = pstmt.executeQuery();
+        while (rs.next()) {
+            ReimbursementModel model = new ReimbursementModel(
+                    rs.getInt("reimbursement_id"),
+                    rs.getTimestamp("reimbursement_creation_date"),
+                    rs.getTimestamp("reimbursement_resolution_date"),
+                    rs.getInt("reimbursement_type_id"),
+                    rs.getString("reimbursement_description"),
+                    rs.getDouble("reimbursement_amount"),
+                    rs.getInt("reimbursement_status_id"),
+                    rs.getInt("reimbursement_creator"),
+                    rs.getInt("reimbursement_resolver")
+            );
+            list.add(model);
+        }
+
+        return list;
+    }
     @Override
-    public ReimbursementModel delete(ReimbursementModel model) {
-        return null;
+    public void delete(int id) throws SQLException {
+        String SQL = "Delete from public.reimbursement  WHERE reimbursement_id = ?";
+        PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
+        pstmt.setInt(1, id);
+        pstmt.executeUpdate();
     }
 
     @Override

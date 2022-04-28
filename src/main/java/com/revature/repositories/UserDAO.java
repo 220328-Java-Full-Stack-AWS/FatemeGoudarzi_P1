@@ -3,13 +3,11 @@ package com.revature.repositories;
 import com.revature.models.UserModel;
 import com.revature.util.ConnectionManager;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-import com.revature.util.ConnectionManager;
 
 public class UserDAO implements CRUDInterface<UserModel>{
 
@@ -105,8 +103,8 @@ public class UserDAO implements CRUDInterface<UserModel>{
     }
 
     @Override
-    public UserModel delete(UserModel Model) {
-        return null;
+    public void delete(int id) {
+
     }
 
 }

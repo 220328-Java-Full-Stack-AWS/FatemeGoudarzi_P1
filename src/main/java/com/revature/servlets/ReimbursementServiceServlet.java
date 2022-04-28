@@ -24,25 +24,21 @@ public class ReimbursementServiceServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
          try{
-             List model = rs.getAllReimbursements();
+             String creatorId = req.getHeader("creator_id");
+             List model= creatorId == null ?
+                     rs.getAllReimbursements() :
+                     rs.getReimbursementsByCreatorById(Integer.parseInt(creatorId));
              String json = mapper.writeValueAsString(model);
              resp.getWriter().print(json);
              resp.setStatus(200);
          }catch (SQLException e) {
              e.printStackTrace();
+             resp.setStatus(400);
          }
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        List model = rs.getReimbursementsByStatusById(req.getHeader("status"), Integer.parseInt(req.getHeader( "creator_id")));
-//        String json = mapper.writeValueAsString(model);
-//        resp.setContentType("application/json");
-//        resp.getWriter().print(json);
-//        resp.setStatus(200);
-//    }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
             System.out.println("Inside Post");
@@ -55,14 +51,18 @@ public class ReimbursementServiceServlet extends HttpServlet {
             resp.setStatus(201);
         } catch (SQLException e) {
             e.printStackTrace();
+            resp.setStatus(400);
+
         }
 
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Inside Post");
+        System.out.println("Inside Put");
         ReimbursementModel model = mapper.readValue(req.getInputStream(), ReimbursementModel.class);
+        System.out.println(model);
+
         try {
             model = rs.updateReimbursement(model);
             String json = mapper.writeValueAsString(model);
@@ -70,7 +70,22 @@ public class ReimbursementServiceServlet extends HttpServlet {
             resp.setStatus(201);
         } catch (SQLException e) {
             e.printStackTrace();
+            resp.setStatus(400);
+
         }
 
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String reimbursementId = req.getHeader("reimbursement_id");
+
+        try {
+            rs.deleteReimbursements(Integer.parseInt(reimbursementId));
+            resp.setStatus(200);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            resp.setStatus(400);
+        }
     }
 }
