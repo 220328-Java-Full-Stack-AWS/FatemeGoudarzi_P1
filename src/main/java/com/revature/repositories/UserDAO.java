@@ -83,12 +83,18 @@ public class UserDAO implements CRUDInterface<UserModel>{
     public List<UserModel> getAll() {
         List<UserModel> list = new LinkedList<>();
         try {
-            String SQL = "SELECT * FROM public.users";
+            String SQL = "SELECT user_id, first_Name, last_Name , role_id FROM public.users";
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 UserModel model = new UserModel();
-                model.setUserName(rs.getString("user_name"));
+                model.setFirstName(rs.getString("first_name"));
+                model.setLastName(rs.getString("last_name"));
+                model.setUserId(rs.getInt("user_id"));
+                model.setUserName("");
+                model.setEmail("");
+                model.setRoleId(rs.getInt("role_id"));
+                model.setPassWord("");
                 list.add(model);
             }
         } catch (SQLException e) {

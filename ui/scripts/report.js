@@ -1,15 +1,33 @@
 import { getAllReimbursement, deleteReimbursement, updateReimbursement } from "./reimbursementConnection.js"
+import { getAllUsers } from "./userConnection.js";
 document.addEventListener("DOMContentLoaded", onload);
 
+const ReimbursementType = {
+    101: "Food",
+    201: "Travel",
+    301: "Lodging",
+    401: "Others"
+}
+const StatusType = {
+    10: "NEW",
+    20: "APPROVED",
+    30: "PENDING",
+}
 let reimbursements = [];
+let users = {};
 
 const roleId = window.localStorage.getItem("roleId");
 
 async function onload() {
     reimbursements = await getAllReimbursement();
+    const usersList = await getAllUsers()
+    users = usersList.reduce((acc, user) => {
+        acc[user.userId] = `${user.firstName} ${user.lastName}`;
+        return acc
+    }, {});
     fillReport();
 };
-function removeReport(){
+function removeReport() {
     document.getElementById("table").remove();
 }
 function fillReport() {
@@ -18,18 +36,19 @@ function fillReport() {
     document.getElementById("report").appendChild(table)
     var header = table.createTHead();
     var row = header.insertRow(0);
-    
+
     row.insertCell(0).innerText = "Id";
-    row.insertCell(1).innerText = "Description";
-    row.insertCell(2).innerText = "Creation date";
-    row.insertCell(3).innerText = "Resolution date";
-    row.insertCell(4).innerText = "Status";
-    row.insertCell(5).innerText = "Type";
-    row.insertCell(6).innerText = "Approve";
-    row.insertCell(7).innerText = "Deny";
-    row.insertCell(8).innerText = "Delete";
+    row.insertCell(1).innerText = "Creator";
+    row.insertCell(2).innerText = "Description";
+    row.insertCell(3).innerText = "Creation date";
+    row.insertCell(4).innerText = "Resolution date";
+    row.insertCell(5).innerText = "Status";
+    row.insertCell(6).innerText = "Type";
+    row.insertCell(7).innerText = "Approve";
+    row.insertCell(8).innerText = "Deny";
+    row.insertCell(9).innerText = "Delete";
     reimbursements.forEach(element => {
-       
+
         var tr = document.createElement('tr');
         if (element.reimbursementStatus === 20) {
             tr.classList.add("reimbursementApproved");
@@ -38,6 +57,7 @@ function fillReport() {
             tr.classList.add("reimbursementDenied");
         }
         var td1 = document.createElement('td');
+        var td11 = document.createElement('td');
         var td2 = document.createElement('td');
         var td3 = document.createElement('td');
         var td4 = document.createElement('td');
@@ -47,8 +67,8 @@ function fillReport() {
         var td8 = document.createElement('td');
         var td9 = document.createElement('td');
 
-        var text1 = document.createTextNode(element.reimbursementId);
-        var text2 = document.createTextNode(element.reimbursementDescription);
+       
+      
         const creationDate = new Date(element.creationDate)
         let resolutionDate
         if (element.resolutionDate != null) {
@@ -57,49 +77,17 @@ function fillReport() {
             resolutionDate = "";
         }
 
-        const status = element.reimbursementStatus;
-        let statusType = "";
-        switch (status) {
-            case 10:
-                statusType = "NEW";
-                break;
-            case 20:
-                statusType = "APPROVED";
-                break;
-            case 30:
-                statusType = "PENDING";
-                break;
-        }
+        let statusType = StatusType[element.reimbursementStatus]
 
-        const TypeId = element.reimbursementTypeId;
-        let type = "";
+        let type = ReimbursementType[element.reimbursementTypeId];
 
-        switch (TypeId) {
-            case 101:
-                type = "Food";
-                break;
-            case 201:
-                type = "Travel";
-                break;
-            case 301:
-                type = "Lodging";
-                break;
-            case 401:
-                type = "Others";
-                break;
-        }
-
-        var text3 = document.createTextNode(creationDate.toLocaleDateString());
-        var text4 = document.createTextNode(resolutionDate);
-        var text5 = document.createTextNode(statusType);
-        var text6 = document.createTextNode(type);
-
-        td1.appendChild(text1);
-        td2.appendChild(text2);
-        td3.appendChild(text3);
-        td4.appendChild(text4);
-        td5.appendChild(text5);
-        td6.appendChild(text6);
+        td1.appendChild(document.createTextNode(element.reimbursementId));
+        td11.appendChild(document.createTextNode(users[element.reimbursementCreator]))
+        td2.appendChild(document.createTextNode(element.reimbursementDescription));
+        td3.appendChild(document.createTextNode(creationDate.toLocaleDateString()));
+        td4.appendChild(document.createTextNode(resolutionDate));
+        td5.appendChild(document.createTextNode(statusType));
+        td6.appendChild(document.createTextNode(type));
 
         const approveBtn = document.createElement('button');
         const denyBtn = document.createElement('button');
@@ -121,6 +109,7 @@ function fillReport() {
 
 
         tr.appendChild(td1);
+        tr.appendChild(td11);
         tr.appendChild(td2);
         tr.appendChild(td3);
         tr.appendChild(td4);
@@ -133,7 +122,7 @@ function fillReport() {
         table.appendChild(tr);
     })
 }
-async function approveDeny(id, reimbursementStatus ) {
+async function approveDeny(id, reimbursementStatus) {
     const index = reimbursements.findIndex(r => r.reimbursementId === id);
     const newReimbursement = { ...reimbursements[index] };
     newReimbursement.reimbursementStatus = reimbursementStatus;

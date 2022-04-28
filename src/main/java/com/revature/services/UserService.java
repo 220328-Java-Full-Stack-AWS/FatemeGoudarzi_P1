@@ -3,7 +3,6 @@ package com.revature.services;
 import com.revature.models.UserModel;
 import com.revature.repositories.UserDAO;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -47,21 +46,8 @@ import java.util.List;
 	}
 
 	//Retrieve list of all usernames in the system
-	public List getAllUserNames(){
-		List<String> userNamesList = new LinkedList<>();
-		List rawList = userDao.getAll();
-
-		for( int i = 0;i<rawList.size() ;i++){
-			UserModel out = (UserModel) rawList.get(i);
-			userNamesList.add(out.getUserName());
-		}
-		return userNamesList;
+	public List<UserModel>  getAllUserNames(){
+		return userDao.getAll();
 	}
-
-
-
-
-
-
 
 }

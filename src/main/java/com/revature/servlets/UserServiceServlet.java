@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 public class UserServiceServlet extends HttpServlet {
     private UserService us;
@@ -23,24 +22,23 @@ public class UserServiceServlet extends HttpServlet {
         this.mapper = new ObjectMapper();
     }
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//         resp.setStatus(200);
-//         List model = us.getAllUserNames();
-//         String json = mapper.writeValueAsString(model);
-//         resp.getWriter().print(json);
-//    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserModel model = new UserModel();
-        model.setUserName(req.getHeader("userName"));
-        model.setPassWord(req.getHeader("passWord"));
-        model= us.read(model);
-        String json = mapper.writeValueAsString(model);
-        resp.setContentType("application/json");
-        resp.getWriter().print(json);
-        System.out.println(model);
+        String userName = req.getHeader("userName");
+        if(userName != null) {
+            UserModel model = new UserModel();
+            model.setUserName(userName);
+            model.setPassWord(req.getHeader("passWord"));
+            model = us.read(model);
+            String json = mapper.writeValueAsString(model);
+            resp.setContentType("application/json");
+            resp.getWriter().print(json);
+            System.out.println(model);
+        } else {
+            String json = mapper.writeValueAsString(us.getAllUserNames());
+            resp.getWriter().print(json);
+        }
         resp.setStatus(200);
     }
 

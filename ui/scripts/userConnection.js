@@ -1,8 +1,11 @@
+const baseUrl = 'http://localhost:8080/P1';
+const registerUrl = `${baseUrl}/register`;
+const loginUrl = `${baseUrl}/login`;
+const usersUrl = `${baseUrl}/users`;
 
 export async function registerRequest(newUser) {
-    let userResourceURL = "http://localhost:8080/P1/register";
     let response = await fetch(
-        userResourceURL,
+        registerUrl,
         {
             method: "POST",
             headers: {
@@ -16,9 +19,8 @@ export async function registerRequest(newUser) {
 }
 
 export async function loginRequest(authDto) {
-  let userResourceURL = "http://localhost:8080/P1/login";
     let response = await fetch(
-        userResourceURL,
+        loginUrl,
         {
             method: "POST",
             headers: {
@@ -33,9 +35,8 @@ export async function loginRequest(authDto) {
 }
 
 export async function updateUserRequest(user) {
-    
     let response = await fetch(
-        userResourceURL,
+        usersUrl,
         {
             method: "PUT",
             headers: {
@@ -49,10 +50,8 @@ export async function updateUserRequest(user) {
 }
 
 export async function getUser(un) {
-    let userResourceURL = `http://localhost:8080/P1/users`;
-
     let response = await fetch(
-        userResourceURL,
+        usersUrl,
         {
             method: "GET",
             headers: {
@@ -64,9 +63,22 @@ export async function getUser(un) {
     return response;
 }
 
+export async function getAllUsers() {
+    let response = await fetch(
+        usersUrl,
+        {
+            method: "GET",
+            headers: {
+            }
+        }
+    );
+
+    return await response.json();
+}
+
 export async function deleteUser(un) {
     let response = await fetch(
-        userResourceURL,
+        usersUrl,
         {
             method: "DELETE",
             headers: {
