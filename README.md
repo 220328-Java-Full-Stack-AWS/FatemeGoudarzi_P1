@@ -26,7 +26,7 @@ Functional web UI to consume RESTful API;
 Workflows to complete all user stories;
 Validate all user input;
 
-The persistence-layer system utilize JDBC to connect to a Postgres database. The API-layer utilize Java servlets to expose a public interface. The front-end view utilizes HTML/CSS/JavaScript to make an application that can call server-side components in a generally RESTful manner. The middle tier follows proper layered architecture. 
+The persistence-layer system utilizes JDBC to connect to a Postgres database. The API-layer utilizes Java servlets to expose a public interface. The front-end view utilizes HTML/CSS/JavaScript to make an application that can call server-side components in a generally RESTful manner. The middle tier follows proper layered architecture. 
 
 **User Stories:**
 Guest:
