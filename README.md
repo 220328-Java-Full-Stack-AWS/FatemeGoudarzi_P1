@@ -13,7 +13,7 @@ Financial manager:
 - As an Financial, I can filter requests by status
 
 Regular user:
-- As a user, I can log into my account
+- As a user, I can login to my account
 - As a user, I can submit a request for reimbursement
 - As a user, I can cancel a pending request for reimbursement
 - As a user, I can view my pending and completed past requests for reimbursement
@@ -33,6 +33,7 @@ Regular user:
 
 ## Features :
 
+<<<<<<< HEAD
 Usable features now:
 - Register a new account
 - login
@@ -46,3 +47,16 @@ Usable features now:
 To-do list:
 - Password hashing;
 - Account management;
+=======
+
+## Getting Started
+
+Usage
+---
+
+Contributors
+---
+
+License
+---
+>>>>>>> 642e479813ca65d969520f37f23cea337ddb6dee
