@@ -1,7 +1,6 @@
 ## Employee Reimbursement System (ERS)
 
 ## Project Description
---- 
 The Expense Reimbursement System (ERS) will manage the process of reimbursing employees for expenses incurred while on company time.System admin is the only person can make an account for new employees and register them in the system. All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement. 
 
 Admin:
@@ -21,8 +20,6 @@ User:
 - As a user, I can edit my pending requests for reimbursement
 
 ## Technologies Used
-
---- 
 - Java 8
 - Java Servlets
 - JDBC
@@ -38,7 +35,7 @@ User:
 
 
 ## Getting Started
----
+
 Usage
 ---
 
