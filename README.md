@@ -30,11 +30,7 @@ Regular user:
 - Apache Maven
 - HTML
 - CSS
-
 ## Features :
-
-<<<<<<< HEAD
-Usable features now:
 - Register a new account
 - login
 - logout
@@ -47,16 +43,5 @@ Usable features now:
 To-do list:
 - Password hashing;
 - Account management;
-=======
 
-## Getting Started
 
-Usage
----
-
-Contributors
----
-
-License
----
->>>>>>> 642e479813ca65d969520f37f23cea337ddb6dee
