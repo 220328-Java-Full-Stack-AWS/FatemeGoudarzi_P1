@@ -1,4 +1,4 @@
-## Employee Reimbursment System (ERS)
+## Employee Reimbursement System (ERS)
 
 ## Project Description
 --- 
@@ -19,10 +19,9 @@ User:
 - As a user, I can cancel a pending request for reimbursement
 - As a user, I can view my pending and completed past requests for reimbursement
 - As a user, I can edit my pending requests for reimbursement
-Stretch Goals:
-- As an admin, I can change a user's role between admin and user
 
 ## Technologies Used
+
 --- 
 - Java 8
 - Java Servlets
