@@ -251,18 +251,24 @@ main {
 .content-box {
   border:2px solid var(--clr-grey-1);
   padding:1%;
-  margin: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+
 }
 .login-form{
     width:95vw;
     min-width: 350px;
-    margin-top: 10%;
-    
+}
+
+.login-form h1,h2,h3,h4{
+  text-align: center;
 }
 
 .register-form{
     width:95vw;
     min-width: 350px;
+    top:20%;
     }
 
  .reim-form{
@@ -286,6 +292,22 @@ main {
     .alert-window{
       width:40vw;
     }
+}
+
+@media all and (max-width:280px){
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1rem;
+  }
+  h4 {
+    font-size: 0.5rem;
+  }
+  
 }
 
 .full-screen {

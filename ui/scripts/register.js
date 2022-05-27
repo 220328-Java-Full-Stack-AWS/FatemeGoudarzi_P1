@@ -3,8 +3,6 @@ import {openAlertMessage,closeAlertMessage} from "./alertbox.js"
 const registerElm = document.getElementById("register-btn");
 registerElm.addEventListener('click',submitForm)
 
-
-
 async function submitForm() {
     let firstName = document.getElementById("firstname").value;               
     let lastName = document.getElementById("lastname").value
@@ -23,7 +21,6 @@ async function submitForm() {
     console.log(newUser);
 
     let response = await registerRequest(newUser);
-
     console.log("Response: ", response);
     console.log("Response JSON: ", response.json());
 
