@@ -11,18 +11,19 @@ public class UserModel extends Model{
     private String userName;
     private String email;
     private String passWord = "123" ;
-    private int roleId=1;
+    private int roleId;
 
     public UserModel() {
     }
 
-    public UserModel(int userId, String firstName, String lastName, String userName, String passWord, String email) {
+    public UserModel(int userId, String firstName, String lastName, String userName, String passWord, String email , int roleId) {
         this.userId=userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.passWord = passWord;
         this.email = email;
+        this.roleId=roleId;
     }
 
     public UserModel(String userName, String passWord) {

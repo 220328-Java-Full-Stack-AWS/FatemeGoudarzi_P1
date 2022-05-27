@@ -47,6 +47,7 @@ function fillReport() {
     row.insertCell(7).innerText = "Approve";
     row.insertCell(8).innerText = "Deny";
     row.insertCell(9).innerText = "Delete";
+    row.insertCell(10).innerText = "Edit";
     reimbursements.forEach(element => {
 
         var tr = document.createElement('tr');
@@ -66,6 +67,7 @@ function fillReport() {
         var td7 = document.createElement('td');
         var td8 = document.createElement('td');
         var td9 = document.createElement('td');
+        var td10 = document.createElement('td');
 
        
       
@@ -92,19 +94,22 @@ function fillReport() {
         const approveBtn = document.createElement('button');
         const denyBtn = document.createElement('button');
         const deleteBtn = document.createElement('button');
+        const editBtn = document.createElement('button');
 
         approveBtn.innerText = "Approve";
         denyBtn.innerText = "Deny";
         deleteBtn.innerText = "Delete";
+        editBtn.innerText = "Edit";
 
-        approveBtn.addEventListener('click', () => approveDeny(element.reimbursementId, 20));
+        approveBtn.addEventListener('click', () => approveDeny(element.reimbursementId, 20) );
         denyBtn.addEventListener('click', () => approveDeny(element.reimbursementId, 30));
         deleteBtn.addEventListener('click', () => onDelete(element.reimbursementId));
-        approveBtn.disabled = roleId !== "2";
-        denyBtn.disabled = roleId !== "2";
+        approveBtn.disabled = roleId !== "3";
+        denyBtn.disabled = roleId !== "3";
         td7.appendChild(approveBtn);
         td8.appendChild(denyBtn);
         td9.appendChild(deleteBtn);
+        td10.appendChild(editBtn);
         deleteBtn.disabled = statusType !== "NEW";
 
 
@@ -118,6 +123,7 @@ function fillReport() {
         tr.appendChild(td7);
         tr.appendChild(td8);
         tr.appendChild(td9);
+        tr.appendChild(td10);
 
         table.appendChild(tr);
     })

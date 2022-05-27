@@ -1,9 +1,7 @@
 package com.revature;
 
 
-import com.revature.models.UserModel;
 import com.revature.repositories.ReimbursementDAO;
-import com.revature.repositories.UserDAO;
 import com.revature.services.ReimbursementService;
 
 import java.sql.SQLException;
@@ -23,9 +21,9 @@ public class Driver {
 //        System.out.println(us2.getAllUserNames());
 
         //Retrive a username
-        UserDAO user = new UserDAO();
-        UserModel model = new UserModel( "admin","123");
-       System.out.println(user.read(model));
+//        UserDAO user = new UserDAO();
+//        UserModel model = new UserModel( "admin","123");
+//       System.out.println(user.read(model));
 
 //
 //        //Login

@@ -12,6 +12,11 @@
 
 <body>
     <div class="register-form content-box">
+        <h2 >Registration Form </h2>
+        <br>
+        <h4 >Please complete below information:</h4>
+        <br>
+        <hr>
         <div class="flex-column">
             <div class="flex-row">
                 <label>First name: </label>
@@ -21,6 +26,16 @@
                 <label>Last name: </label>
                 <input type="text" id="lastname" placeholder="last name" name="">
             </div>
+
+            <div class="flex-row">
+            <label>Role: </label>
+            <select class="role-id" id="role-id" name="role-id" >
+                <option value="1">Admin</option>
+                <option value="2">Employee</option>
+                <option value="3">Financial Manager</option>
+            </select>
+            </div>
+
             <div class="flex-row">
                 <label>Password: </label>
                 <input type="password" id="password" placeholder="password" name="">

@@ -5,17 +5,20 @@ registerElm.addEventListener('click',submitForm)
 
 async function submitForm() {
     let firstName = document.getElementById("firstname").value;               
-    let lastName = document.getElementById("lastname").value
+    let lastName = document.getElementById("lastname").value;
+    let roleId = document.getElementById("role-id").value;
     let randomNumber= Math.floor(Math.random()*1000)
     let username =`${firstName}${lastName}${randomNumber}`
     let email=`${username}@reva.com`             
     document.getElementById("username").value=username;
     document.getElementById("email").value=email;
+    console.log(roleId);
     let newUser = {
         firstName: firstName,
         lastName: lastName,
         userName: username,
         email: email,
+        roleId: roleId,
         passWord: document.getElementById("password").value
     }
     console.log(newUser);

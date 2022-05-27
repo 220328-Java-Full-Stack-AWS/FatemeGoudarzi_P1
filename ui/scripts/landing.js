@@ -28,8 +28,8 @@ console.log("authorizedUser: ", authorizedUser);
 })(); 
 
 function registerAccount(){
-  let roleId = localStorage.getItem("roleId").toLowerCase();
-  if(roleId == 2){
+  let roleId = localStorage.getItem("roleId");
+  if(roleId == 1){
       window.location.href="./register.html";
   }  else {
       alert("Sorry!You are not authorized to register an account!");

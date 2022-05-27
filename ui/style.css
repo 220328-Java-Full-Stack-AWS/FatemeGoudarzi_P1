@@ -196,6 +196,10 @@ main {
   align-self: center
 }
 
+.btn.logout{
+  background-color: var(--clr-red-light);
+}
+
 .btn.submit:hover{
   background: var(--clr-grey-4);
 }
@@ -266,10 +270,16 @@ main {
 }
 
 .register-form{
-    width:95vw;
+    width:90vw;
     min-width: 350px;
     top:20%;
     }
+
+ .register-form label{
+   font-size: larger;
+   font-weight: bolder;
+ }   
+
 
  .reim-form{
       min-width: 150px;

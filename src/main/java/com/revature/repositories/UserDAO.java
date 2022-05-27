@@ -15,7 +15,7 @@ public class UserDAO implements CRUDInterface<UserModel>{
     @Override
     public UserModel create(UserModel model) {
 
-        String SQL = " INSERT INTO public.users ( first_name, last_name, user_name, pass_word,email) VALUES(?, ?, ?, ?, ?);";
+        String SQL = " INSERT INTO public.users ( first_name, last_name, user_name, pass_word,email,role_id) VALUES(?, ?, ?, ?, ?,?);";
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
             pstmt.setString(1,model.getFirstName());
@@ -23,6 +23,7 @@ public class UserDAO implements CRUDInterface<UserModel>{
             pstmt.setString(3,model.getUserName());
             pstmt.setString(4,model.getPassWord());
             pstmt.setString(5,model.getEmail());
+            pstmt.setInt(6,model.getRoleId());
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
