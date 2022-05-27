@@ -13,7 +13,7 @@ Financial manager:
 - As an Financial, I can filter requests by status
 
 User:
-- As a user, I can log into my account
+- As a user, I can login to my account
 - As a user, I can submit a request for reimbursement
 - As a user, I can cancel a pending request for reimbursement
 - As a user, I can view my pending and completed past requests for reimbursement
