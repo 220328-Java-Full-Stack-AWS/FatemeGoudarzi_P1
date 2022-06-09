@@ -38,10 +38,13 @@ Regular user:
 - Delete or edit a reimbursement if it is not approved.
 - Access to reimbursement reports.
 - Restricted access for reimbursements approval or denial. (Only financial manager can approve or deny a reimbursement)
--Restricted access for account creation. (Only system admin can make an account.)
+- Restricted access for account creation. (Only system admin can make an account.)
+- Password hashing;
 
 To-do list:
-- Password hashing;
 - Account management;
+- Get confirmation before delete;
+- Filtered Reports;
+- Reset Password;
 
 
