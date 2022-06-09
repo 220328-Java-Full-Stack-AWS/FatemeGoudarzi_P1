@@ -42,6 +42,9 @@ public class AuthService {
         response.setUserName(model.getUserName());
         response.setUserId(model.getUserId());
         response.setRoleId(model.getRoleId());
+        response.setFirstName(model.getFirstName());
+        response.setLastName(model.getLastName());
+
         return response;
     }
 
@@ -68,23 +71,7 @@ public class AuthService {
      * It leverages the Optional type which is a useful interface to handle the
      * possibility of a user being unavailable.
      */
-//    public UserModel exampleRetrieveCurrentUser() {
-//        return null;
-//    }
+
 }
 
 
-//login to ERS.
-//	public String login(){
-//		UserDAO userDao = new UserDAO();
-//		String output;
-//		UserModel read_model = new UserModel("AliGoodi123","12345");
-//		if (userDao.read(read_model).equals("successful")){
-//			output="Welcome to ERS system!";
-//		}else if(userDao.read(read_model).equals("invalid_user_name")){
-//			output="You have entered a wrong User Name in the system!";
-//		}else{
-//			output="Wrong Password! Try again!";
-//		};
-//		return output;
-//	}

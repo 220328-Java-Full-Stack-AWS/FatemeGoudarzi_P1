@@ -29,7 +29,6 @@ public class UserServiceServlet extends HttpServlet {
         if(userName != null) {
             UserModel model = new UserModel();
             model.setUserName(userName);
-            model.setPassWord(req.getHeader("passWord"));
             model = us.read(model);
             String json = mapper.writeValueAsString(model);
             resp.setContentType("application/json");

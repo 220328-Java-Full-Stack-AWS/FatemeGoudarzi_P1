@@ -21,7 +21,6 @@ async function submitForm() {
         roleId: roleId,
         passWord: document.getElementById("password").value
     }
-    console.log(newUser);
 
     let response = await registerRequest(newUser);
     console.log("Response: ", response);
@@ -29,8 +28,6 @@ async function submitForm() {
 
     if (response.status == 201) {
         openAlertMessage("user account successfully created.");
-        //navigate the window to the landing page
-         //window.location.href = "./landingPage.html";
 
     } else {
         openAlertMessage("Unable to register!");

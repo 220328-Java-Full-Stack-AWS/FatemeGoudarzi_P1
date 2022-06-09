@@ -11,5 +11,8 @@ export function openAlertMessage(message){
 
 export function closeAlertMessage(){  
     alertWindowElm.classList.add('hidden');
+//     navigate the window to the landing page
+//     window.location.href = "./landingPage.html";
+
 }
 

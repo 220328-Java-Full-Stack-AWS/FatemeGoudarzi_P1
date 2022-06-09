@@ -18,17 +18,23 @@ logoutElm.addEventListener('click', () => {
 let authorizedUser = localStorage.getItem("authToken");
 console.log("authorizedUser: ", authorizedUser);
 
-(async function displayUser() {
-  let response = await getUser(authorizedUser);
-  let json = await response.json();
-  console.log("Response: ", response);
-  console.log("Response JSON: ", json);
-  let header ="Welcome, " + json.firstName +" "+ json.lastName;
+//(async function displayUser() {
+//  let response = await getUser(authorizedUser);
+//  let json = await response.json();
+//  console.log("Response: ", response);
+//  console.log("Response JSON: ", json);
+//  let header ="Welcome, " + json.firstName +" "+ json.lastName;
+//  document.getElementById("header-title").innerText = header;
+//})();
+
+(function displayUser() {
+  let header ="Welcome, " + localStorage.firstName +" "+ localStorage.lastName;
   document.getElementById("header-title").innerText = header;
-})(); 
+})();
 
 function registerAccount(){
   let roleId = localStorage.getItem("roleId");
+  //roleId ==1 means admin
   if(roleId == 1){
       window.location.href="./register.html";
   }  else {
