@@ -1,5 +1,6 @@
 package com.revature.repositories;
 
+import com.revature.models.PassEnc;
 import com.revature.models.UserModel;
 import com.revature.util.ConnectionManager;
 
@@ -11,17 +12,17 @@ import java.util.List;
 
 public class UserDAO implements CRUDInterface<UserModel>{
 
-
     @Override
     public UserModel create(UserModel model) {
 
+        PassEnc encripted = new PassEnc();
         String SQL = " INSERT INTO public.users ( first_name, last_name, user_name, pass_word,email,role_id) VALUES(?, ?, ?, ?, ?,?);";
         try {
             PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
             pstmt.setString(1,model.getFirstName());
             pstmt.setString(2,model.getLastName());
             pstmt.setString(3,model.getUserName());
-            pstmt.setString(4,model.getPassWord());
+            pstmt.setString(4, encripted.encode(model.getPassWord()));
             pstmt.setString(5,model.getEmail());
             pstmt.setInt(6,model.getRoleId());
             pstmt.executeUpdate();
@@ -33,13 +34,15 @@ public class UserDAO implements CRUDInterface<UserModel>{
 
     @Override
     public UserModel read(UserModel model) {
+        PassEnc encripted = new PassEnc();
         UserModel outModel = new UserModel();
         if (model.getPassWord() != null && model.getUserName() != null) {
+
             String SQL = "SELECT * from public.users WHERE user_name = ? AND pass_word=?";
             try {
                 PreparedStatement pstmt = ConnectionManager.getConnection().prepareStatement(SQL);
                 pstmt.setString(1, model.getUserName());
-                pstmt.setString(2, model.getPassWord());
+                pstmt.setString(2, encripted.encode(model.getPassWord()));
                 ResultSet rs = pstmt.executeQuery();
                 ResultSet keys = pstmt.getGeneratedKeys();
                 while (rs.next()) {
@@ -48,7 +51,6 @@ public class UserDAO implements CRUDInterface<UserModel>{
                     outModel.setUserName(rs.getString("user_name"));
                     outModel.setEmail(rs.getString("email"));
                     outModel.setRoleId(rs.getInt("role_id"));
-                    outModel.setPassWord(rs.getString("pass_word"));
                     outModel.setUserId(rs.getInt("user_id"));
                 }
 
@@ -69,7 +71,7 @@ public class UserDAO implements CRUDInterface<UserModel>{
                     outModel.setUserName(rs.getString("user_name"));
                     outModel.setEmail(rs.getString("email"));
                     outModel.setRoleId(rs.getInt("role_id"));
-                    outModel.setPassWord(rs.getString("pass_word"));
+                    outModel.setUserId(rs.getInt("user_id"));
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -77,7 +79,6 @@ public class UserDAO implements CRUDInterface<UserModel>{
         }
         return outModel;
     }
-
 
 
     @Override

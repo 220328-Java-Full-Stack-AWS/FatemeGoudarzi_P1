@@ -23,7 +23,7 @@ export async function getAllReimbursement() {
         {
             method: "GET",
             headers: 
-                { ... roleId === "2" ? 
+                { ... roleId === "3" ?
                  {} :
                  { creator_id : window.localStorage.getItem("userId")}
             }
